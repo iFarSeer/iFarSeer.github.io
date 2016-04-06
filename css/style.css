@@ -1143,12 +1143,6 @@ a {
   -ms-transition: background 0.3s;
   transition: background 0.3s;
 }
-.article-more-link a:hover {
-  background: #3c3c3c;
-}
-.article-more-link a.hidden {
-  visibility: hidden;
-}
 #article-nav {
   margin: 80px 0 30px 0;
   padding-bottom: 10px;
