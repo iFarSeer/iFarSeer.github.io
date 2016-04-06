@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Android Studio 基础篇三 各种Version | 赵淑超</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="各种版本在Gradle初步了解后，可能未能解除你心中关于Gradle的很多疑惑，很不幸的告诉大家，这篇博文主要介绍Android Studio中涉及的各种版本，如果你对这些已经很了解，请跳过。
+为什么在这里说各种版本在主推使用Gradle构建项目，Android Studio作为IDE后，朋友同事对构建过程中涉及到的版本信息理解不深入，认识也发生了偏差，所以在这篇博文中，我们来一起细数各种版本。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Studio 基础篇三 各种Version">
+<meta property="og:url" content="https://github.com/iFarSeer/2015/09/28/Android Studio 基础篇三 各种Version/index.html">
+<meta property="og:site_name" content="赵淑超">
+<meta property="og:description" content="各种版本在Gradle初步了解后，可能未能解除你心中关于Gradle的很多疑惑，很不幸的告诉大家，这篇博文主要介绍Android Studio中涉及的各种版本，如果你对这些已经很了解，请跳过。
+为什么在这里说各种版本在主推使用Gradle构建项目，Android Studio作为IDE后，朋友同事对构建过程中涉及到的版本信息理解不深入，认识也发生了偏差，所以在这篇博文中，我们来一起细数各种版本。">
+<meta property="og:image" content="https://raw.githubusercontent.com/cczscq/cczscq.github.io/master/public/img/2015-09-28-AndroidStudio_Version.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cczscq/cczscq.github.io/master/public/img/2015-09-28-Complie_SDK_Version.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cczscq/cczscq.github.io/master/public/img/2015-09-28-Build_tool_Version.png">
+<meta property="og:updated_time" content="2016-04-06T15:50:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Studio 基础篇三 各种Version">
+<meta name="twitter:description" content="各种版本在Gradle初步了解后，可能未能解除你心中关于Gradle的很多疑惑，很不幸的告诉大家，这篇博文主要介绍Android Studio中涉及的各种版本，如果你对这些已经很了解，请跳过。
+为什么在这里说各种版本在主推使用Gradle构建项目，Android Studio作为IDE后，朋友同事对构建过程中涉及到的版本信息理解不深入，认识也发生了偏差，所以在这篇博文中，我们来一起细数各种版本。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/cczscq/cczscq.github.io/master/public/img/2015-09-28-AndroidStudio_Version.png">
+  
+    <link rel="alternative" href="/atom.xml" title="赵淑超" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://img3.imgtn.bdimg.com/it/u=3421989320,1824622967&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">赵淑超</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/iFarSeer" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="mailto:farseer.spade@gmail.com" title="mail">mail</a>
+					        
+								<a class="google" target="_blank" href="https://plus.google.com/117233387937781187519" title="google">google</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Android-Studio/" style="font-size: 20px;">Android Studio</a> <a href="/tags/gradle/" style="font-size: 20px;">gradle</a> <a href="/tags/realm/" style="font-size: 10px;">realm</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">一个程序员，安静，专注，认真... 其实，基情，213才是真正的我~</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">赵淑超</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://img3.imgtn.bdimg.com/it/u=3421989320,1824622967&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">赵淑超</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/iFarSeer" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:farseer.spade@gmail.com" title="mail">mail</a>
+			        
+						<a class="google" target="_blank" href="https://plus.google.com/117233387937781187519" title="google">google</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-Android Studio 基础篇三 各种Version" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/28/Android Studio 基础篇三 各种Version/" class="article-date">
+  	<time datetime="2015-09-28T15:11:54.000Z" itemprop="datePublished">2015-09-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android Studio 基础篇三 各种Version
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gradle/">gradle</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Android/">Android</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        
+          <h3 id="各种版本"><a href="#各种版本" class="headerlink" title="各种版本"></a>各种版本</h3><p>在<a href="http://localhost:4000/android/2015/09/22/Android%20Studio%20%E5%9F%BA%E7%A1%80%E7%AF%87%E4%BA%8C%20Gradle%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3/" target="_blank" rel="external">Gradle初步了解</a>后，可能未能解除你心中关于Gradle的很多疑惑，很不幸的告诉大家，这篇博文主要介绍Android Studio中涉及的各种版本，如果你对这些已经很了解，请跳过。</p>
+<h3 id="为什么在这里说各种版本"><a href="#为什么在这里说各种版本" class="headerlink" title="为什么在这里说各种版本"></a>为什么在这里说各种版本</h3><p>在主推使用Gradle构建项目，Android Studio作为IDE后，朋友同事对构建过程中涉及到的版本信息理解不深入，认识也发生了偏差，所以在这篇博文中，我们来一起细数各种版本。</p>
+<h3 id="Android-Studio-Version"><a href="#Android-Studio-Version" class="headerlink" title="Android Studio Version"></a>Android Studio Version</h3><p>Android Studio作为开发者使用的IDE，会不断的升级和完善，Google大概每周都会有更新，当然每次都会更新版本。大家一起来确认下目前自己使用的Android Studio 版本。<br><img src="https://raw.githubusercontent.com/cczscq/cczscq.github.io/master/public/img/2015-09-28-AndroidStudio_Version.png" alt=""><br>目前，我使用Android Studio的版本是Android Studio 1.4 RC 3。</p>
+<h3 id="Gradle-Plugin-Version"><a href="#Gradle-Plugin-Version" class="headerlink" title="Gradle Plugin Version"></a>Gradle Plugin Version</h3><p>Android Studio只是一个IDE，是一个基于IntelliJ IDEA 改造的IDE，一个IDE怎么样去驱动Gradle构建项目呢？我想大家都会想到插件，的确就是插件。Google在Android Studio集成了Gradle插件。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        mavenCentral()</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath <span class="string">'com.android.tools.build:gradle:1.3.0'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在dependencies中<code>classpath &#39;com.android.tools.build:gradle:1.3.0&#39;</code>为开发者指定构建项目需要使用插件<code>com.android.tools.build:gradle</code>，其中版本为<code>1.3.0</code>。</p>
+<h3 id="Gradle-Version"><a href="#Gradle-Version" class="headerlink" title="Gradle Version"></a>Gradle Version</h3><p>经过前几篇博文的介绍，大家对Gradle Version都已经比较了解啦。Gradle Version是开发者本地安装和配置的Gradle的版本，可以通过gradle -v或者在项目目录下./gradlew -v 查看。</p>
+<h3 id="Java-Version"><a href="#Java-Version" class="headerlink" title="Java Version"></a>Java Version</h3><p>在这里我也把JDK版本罗列出来，主要是因为开源社区中很多代码都是基于<code>Java 7</code>或者 <code>java 8</code>开发的，而身边的朋友本地JDK版本为<code>Java 6</code>。当使用开源社区源码时，遇到编译性的问题。在这里提醒大家注意自己使用的Java Version，除此之外，我们可以在build.gradle指定使用具体JavaVersion。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">compileOptions &#123;</span><br><span class="line">    sourceCompatibility JavaVersion.VERSION_1_7</span><br><span class="line">    targetCompatibility JavaVersion.VERSION_1_7</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="compileSdkVersion"><a href="#compileSdkVersion" class="headerlink" title="compileSdkVersion"></a>compileSdkVersion</h3><p>compileSdkVersion是指定API Level去编译项目代码。<br><img src="https://raw.githubusercontent.com/cczscq/cczscq.github.io/master/public/img/2015-09-28-Complie_SDK_Version.png" alt=""><br>大家可以打开Android Studio， Preferences-&gt;Appearance &amp; Behavior-&gt;System Settings选择SDK Platforms TAB，查看本地已支持的compileSdkVersion。如果发现本地支持只有最新版本，建议更新下。</p>
+<h3 id="buildToolsVersion"><a href="#buildToolsVersion" class="headerlink" title="buildToolsVersion"></a>buildToolsVersion</h3><p>buildToolsVersion是指使用哪个版本的aapt，dx工具打包。<br><img src="https://raw.githubusercontent.com/cczscq/cczscq.github.io/master/public/img/2015-09-28-Build_tool_Version.png" alt=""><br>可以打开Android Studio， Preferences-&gt;Appearance &amp; Behavior-&gt;System Settings选择SDK Tools TAB，查看本地已支持的buildToolsVersion。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在了解上述六个版本后，我希望大家能够达到在使用开源代码时，能够轻松解决编译性问题，把项目运行起来。完成这个初步目标后，我们会在后续中级，高级的博文中，灵活的运用现在的知识，轻松搞定各种小需求。</p>
+
+        
+      
+    </div>
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/29/Android Studio 基础篇四 BuildTypes/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Android Studio 基础篇四 BuildTypes
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/21/Android Studio 基础篇二 Gradle初步了解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android Studio 基础篇二 Gradle初步了解</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android Studio 基础篇三 各种Version" data-title="Android Studio 基础篇三 各种Version" data-url="https://github.com/iFarSeer/2015/09/28/Android Studio 基础篇三 各种Version/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cczscq"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 赵淑超
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
