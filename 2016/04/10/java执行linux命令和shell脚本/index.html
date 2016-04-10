@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>java执行linux命令和shell脚本 | 赵淑超</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="java程序中执行linux命令或者shell脚本依赖于Runtime和Process。
+
+每个Java应用程序都有一个Runtime类实例，使应用程序能够与其运行的环境相连接。可以通过getRuntime方法获取当前运行时环境。     
+​ProcessBuilder.start() 和 Runtime.exec 方法创建一个本机进程，并返回 Process 子类的一个实例，该实例可用来控制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java执行linux命令和shell脚本">
+<meta property="og:url" content="https://github.com/iFarSeer/2016/04/10/java执行linux命令和shell脚本/index.html">
+<meta property="og:site_name" content="赵淑超">
+<meta property="og:description" content="java程序中执行linux命令或者shell脚本依赖于Runtime和Process。
+
+每个Java应用程序都有一个Runtime类实例，使应用程序能够与其运行的环境相连接。可以通过getRuntime方法获取当前运行时环境。     
+​ProcessBuilder.start() 和 Runtime.exec 方法创建一个本机进程，并返回 Process 子类的一个实例，该实例可用来控制">
+<meta property="og:image" content="https://github.com/iFarSeer/img/2016-04-10_java_linux_shell_01.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/2016-04-10_java_linux_shell_02.png">
+<meta property="og:updated_time" content="2016-04-10T06:21:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java执行linux命令和shell脚本">
+<meta name="twitter:description" content="java程序中执行linux命令或者shell脚本依赖于Runtime和Process。
+
+每个Java应用程序都有一个Runtime类实例，使应用程序能够与其运行的环境相连接。可以通过getRuntime方法获取当前运行时环境。     
+​ProcessBuilder.start() 和 Runtime.exec 方法创建一个本机进程，并返回 Process 子类的一个实例，该实例可用来控制">
+<meta name="twitter:image" content="https://github.com/iFarSeer/img/2016-04-10_java_linux_shell_01.png">
+  
+    <link rel="alternative" href="/atom.xml" title="赵淑超" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://ifarseer.github.io/img/zhaosc.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">赵淑超</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/iFarSeer" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="mailto:farseer.spade@gmail.com" title="mail">mail</a>
+					        
+								<a class="google" target="_blank" href="https://plus.google.com/117233387937781187519" title="google">google</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Android-Studio/" style="font-size: 20px;">Android Studio</a> <a href="/tags/gradle/" style="font-size: 16.67px;">gradle</a> <a href="/tags/realm/" style="font-size: 13.33px;">realm</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">一个程序员，安静，专注，认真... 其实，基情，213才是真正的我~</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">赵淑超</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://ifarseer.github.io/img/zhaosc.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">赵淑超</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/iFarSeer" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:farseer.spade@gmail.com" title="mail">mail</a>
+			        
+						<a class="google" target="_blank" href="https://plus.google.com/117233387937781187519" title="google">google</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-java执行linux命令和shell脚本" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/10/java执行linux命令和shell脚本/" class="article-date">
+  	<time datetime="2016-04-10T05:52:42.000Z" itemprop="datePublished">2016-04-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java执行linux命令和shell脚本
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/java/">java</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        
+          <p>java程序中执行linux命令或者shell脚本依赖于Runtime和Process。</p>
+<ul>
+<li>每个Java应用程序都有一个Runtime类实例，使应用程序能够与其运行的环境相连接。可以通过getRuntime方法获取当前运行时环境。     </li>
+<li>​ProcessBuilder.start() 和 Runtime.exec 方法创建一个本机进程，并返回 Process 子类的一个实例，该实例可用来控制进程并获得相关信息。Process 类提供了执行从进程输入、执行输出到进程、等待进程完成、检查进程的退出状态以及销毁（杀掉）进程的方法</li>
+</ul>
+<h4 id="执行命令代码"><a href="#执行命令代码" class="headerlink" title="执行命令代码"></a>执行命令代码</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> List&lt;String&gt; <span class="title">runCommand</span><span class="params">(String cmd, ResultProcessor processor)</span> </span>&#123;</span><br><span class="line">        List&lt;String&gt; resultList = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        String[] cmds = &#123;<span class="string">"/bin/sh"</span>, <span class="string">"-c"</span>, cmd&#125;;</span><br><span class="line">        Process pro = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            pro = Runtime.getRuntime().exec(cmds);</span><br><span class="line">            pro.waitFor();</span><br><span class="line">            InputStream in = pro.getInputStream();</span><br><span class="line">            BufferedReader read = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(in));</span><br><span class="line">            String line = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">while</span> ((line = read.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">                processor.process(resultList, line);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> resultList;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>参数cmd是需要执行linux命令或者shell脚本绝对位置；</li>
+<li>参数processor是对获得输出的处理器。</li>
+</ul>
+<h4 id="log方法"><a href="#log方法" class="headerlink" title="log方法"></a>log方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">log</span><span class="params">(List&lt;String&gt; resultList)</span></span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (resultList == <span class="keyword">null</span> || resultList.size() == <span class="number">0</span>) &#123;</span><br><span class="line">           System.out.println(<span class="string">"resultList 为空"</span>);</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">for</span> (String result : resultList) &#123;</span><br><span class="line">           System.out.println(result);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="ResultProcessor"><a href="#ResultProcessor" class="headerlink" title="ResultProcessor"></a>ResultProcessor</h4><p>ResultProcessor是对命令输出分行依次处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ResultProcessor</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">process</span><span class="params">(List&lt;String&gt; textList, String text)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="简单命令pwd测试"><a href="#简单命令pwd测试" class="headerlink" title="简单命令pwd测试"></a>简单命令pwd测试</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> List&lt;String&gt; resultList = <span class="keyword">null</span>;</span><br><span class="line">resultList = runCommand(<span class="string">"pwd"</span>, <span class="keyword">new</span> ResultProcessor() &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(List&lt;String&gt; textList, String text)</span> </span>&#123;</span><br><span class="line">    textList.add(text);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">log(resultList);</span><br></pre></td></tr></table></figure>
+<p>测试结果：<br><img src="/img/2016-04-10_java_linux_shell_01.png" alt="linux命令测试结果"></p>
+<h4 id="shell脚本测试"><a href="#shell脚本测试" class="headerlink" title="shell脚本测试"></a>shell脚本测试</h4><p>分析Android项目依赖关系的shell脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line">cd $1</span><br><span class="line">pwd</span><br><span class="line">echo $1</span><br><span class="line">./gradlew -q dependencies app:dependencies --configuration compile</span><br></pre></td></tr></table></figure></p>
+<p>这段shell脚本主要作用是分析当前目录$1下的module的依赖细节。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">String projectDir = <span class="string">"/Users/zhaosc/bob/proj_ccare"</span>;</span><br><span class="line">String gradleShellPath = <span class="string">"/Users/zhaosc/iFarSeer/ClassySharkTool/shell/gradle_dependencies.sh"</span>;</span><br><span class="line">resultList = runCommand(gradleShellPath + <span class="string">" "</span> + projectDir, <span class="keyword">new</span> ResultProcessor() &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(List&lt;String&gt; textList, String text)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (text.contains(<span class="string">":"</span>) &amp;&amp; !text.contains(<span class="string">"project :"</span>) </span><br><span class="line">        &amp;&amp; (text.indexOf(<span class="string">":"</span>) != text.lastIndexOf(<span class="string">":"</span>))) &#123;</span><br><span class="line">      text = text.substring(text.indexOf(<span class="string">"- "</span>) + <span class="number">2</span>);</span><br><span class="line">      <span class="keyword">if</span> (!textList.contains(text)) &#123;</span><br><span class="line">        textList.add(text);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">log(resultList);</span><br></pre></td></tr></table></figure>
+<p>测试结果：<br><img src="/img/2016-04-10_java_linux_shell_02.png" alt="shell脚本测试结果"></p>
+
+        
+      
+    </div>
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/04/09/使用ing的Android Studio插件/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用ing的Android插件</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="java执行linux命令和shell脚本" data-title="java执行linux命令和shell脚本" data-url="https://github.com/iFarSeer/2016/04/10/java执行linux命令和shell脚本/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cczscq"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 赵淑超
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
