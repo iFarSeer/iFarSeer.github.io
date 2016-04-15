@@ -4,21 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Android Studio 前言 | 赵淑超</title>
+  <title>回顾设计模式之工厂模式2[工厂方法] | 赵淑超</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="背景在2013 I/O大会上， Google隆重推出了全新的Android IDE(集成开发环境）——Android Studio。Android Studio基于Jetbrains公司的标志性Java IDE——IntelliJ（开发者社区开源版本）开发。
-2015年06月27日，Google计划放弃Eclipse转向支持Android Studio，Google 会在今年年底停止支持其他集成开">
+  <meta name="description" content="工厂方法（Factory Method）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android Studio 前言">
-<meta property="og:url" content="https://github.com/iFarSeer/2015/09/21/Android Studio 前言/index.html">
+<meta property="og:title" content="回顾设计模式之工厂模式2[工厂方法]">
+<meta property="og:url" content="https://github.com/iFarSeer/2016/04/12/回顾设计模式之工厂模式2[工厂方法]/index.html">
 <meta property="og:site_name" content="赵淑超">
-<meta property="og:description" content="背景在2013 I/O大会上， Google隆重推出了全新的Android IDE(集成开发环境）——Android Studio。Android Studio基于Jetbrains公司的标志性Java IDE——IntelliJ（开发者社区开源版本）开发。
-2015年06月27日，Google计划放弃Eclipse转向支持Android Studio，Google 会在今年年底停止支持其他集成开">
-<meta property="og:updated_time" content="2016-04-06T15:45:08.000Z">
+<meta property="og:description" content="工厂方法（Factory Method）">
+<meta property="og:updated_time" content="2016-04-14T14:21:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android Studio 前言">
-<meta name="twitter:description" content="背景在2013 I/O大会上， Google隆重推出了全新的Android IDE(集成开发环境）——Android Studio。Android Studio基于Jetbrains公司的标志性Java IDE——IntelliJ（开发者社区开源版本）开发。
-2015年06月27日，Google计划放弃Eclipse转向支持Android Studio，Google 会在今年年底停止支持其他集成开">
+<meta name="twitter:title" content="回顾设计模式之工厂模式2[工厂方法]">
+<meta name="twitter:description" content="工厂方法（Factory Method）">
   
     <link rel="alternative" href="/atom.xml" title="赵淑超" type="application/atom+xml">
   
@@ -171,11 +168,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-Android Studio 前言" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-回顾设计模式之工厂模式2[工厂方法]" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/09/21/Android Studio 前言/" class="article-date">
-  	<time datetime="2015-09-21T05:39:59.000Z" itemprop="datePublished">2015-09-21</time>
+      <a href="/2016/04/12/回顾设计模式之工厂模式2[工厂方法]/" class="article-date">
+  	<time datetime="2016-04-12T14:58:59.000Z" itemprop="datePublished">2016-04-12</time>
 </a>
     </div>
   
@@ -188,7 +185,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Android Studio 前言
+      回顾设计模式之工厂模式2[工厂方法]
     </h1>
   
 
@@ -197,14 +194,10 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gradle/">gradle</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
 	</div>
 
         
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Android/">Android</a>
-	</div>
-
 
         <div class="clearfix"></div>
       </div>
@@ -215,34 +208,7 @@
       
         
         
-          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在2013 I/O大会上， Google隆重推出了全新的Android IDE(集成开发环境）——Android Studio。Android Studio基于Jetbrains公司的标志性Java IDE——IntelliJ（开发者社区开源版本）开发。</p>
-<p>2015年06月27日，Google计划放弃Eclipse转向支持Android Studio，Google 会在今年年底停止支持其他集成开发环境。</p>
-<p>随着Google的推动，使Android开发者更加关注Android Studio，目前越来越多的Android开发者使用Android Studio完成开发工作，使用Gradle构建项目。</p>
-<p>但是不幸的是，<a href="http://tools.android.com/tech-docs/new-build-system" target="_blank" rel="external">New Build System</a>相关文档从2013年后没有及时的更新，很多开发者学习到陈旧的知识应用的项目中，面对很多IDE使用，以及项目构建的很多问题没有比较靠谱的参考资料。现在不用担心，在此系列博客中，我会由浅入深的和大家分享有关Android Studio，有关Gradle构建项目的经验。</p>
-<a id="more"></a>
-<h3 id="Android-Studio优秀在哪里？"><a href="#Android-Studio优秀在哪里？" class="headerlink" title="Android Studio优秀在哪里？"></a>Android Studio优秀在哪里？</h3><ol>
-<li>资源在代码中实时预览</li>
-<li>Reveal in Finder,快速定位文件位置</li>
-<li>自动保存</li>
-<li>可选范围搜索</li>
-<li>变更历史记录</li>
-<li>各种你需要或者不需要的插件</li>
-<li>Memory,CPU,GPU和Network分析</li>
-<li>内置Terminal</li>
-<li>内置.9图片编辑</li>
-<li>智能预测报错</li>
-<li>module引入简易</li>
-<li>简单的maven依赖</li>
-<li>多主module支持</li>
-<li>灵活强大的build.gradle</li>
-</ol>
-<p>看到这么多优势，是不是已经迫不及待啦？不要着急我们慢慢来。上面的优势中，11-14是Gradle构建项目带来的强大优势，玩转11-14，构建项目，so easy。</p>
-<h3 id="我与Android-Studio"><a href="#我与Android-Studio" class="headerlink" title="我与Android Studio"></a>我与Android Studio</h3><p>在13年，开发一个时间比较紧急的项目，server端和客户端同步开发，项目开始前只有相关的接口文档，这都算项目开发的正常现象，最难的是客户端需要每周发布一个内部版本，提供内测。serve端接口未通，怎么能够提供稳定的版本内测啊？</p>
-<p>我的解决方案：通过Gradle构建项目，实现内容数据来源在本地模拟数据和server真实数据之间无缝切换，换句话就是，内测版本都是本地模拟数据，暂时绕过对serve端的依赖。客户端团队待server端开发任务完成后，把内容数据来源切换到server真实数据，相关接口跑一轮测试用例，出现问题微调，达到安全可控并行开发。</p>
-<p>确定构建项目工具为Gradle后，IDE徘徊一段时间，在Eclipse和Android Studio一直存在争议，最后还是艰难的选择了Android Studio,Google可能是靠谱的。（Google当时只能说是”可能”靠谱）</p>
-<p>从这个项目开始，我主导的所有项目都是通过Gradle构建，巧妙的解决工作中的很多问题。在海词数字化模板构建中，算是把项目构建玩到极致，大大节省代码维护成本，加快开发速度。当然，也跳进过很多坑，还好都顺利爬出来。</p>
-<p>在后续的文章中，我们一起学习Android Studi，以及Gradle构建项目。</p>
-
+          <h3 id="工厂方法（Factory-Method）"><a href="#工厂方法（Factory-Method）" class="headerlink" title="工厂方法（Factory Method）"></a>工厂方法（Factory Method）</h3>
         
       
     </div>
@@ -253,18 +219,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/09/21/Android Studio 基础篇一  下载与安装/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/04/12/回顾设计模式之工厂模式3[抽象工厂]/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          Android Studio 基础篇一  下载与安装
+          回顾设计模式之工厂模式3[抽象工厂]
         
       </div>
     </a>
   
   
-    <a href="/2015/09/20/realm Android版本准备/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">realm Android版本准备</div>
+    <a href="/2016/04/11/今天，我拯救了一个行业/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">今天，我拯救了一个行业</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -299,7 +265,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Android Studio 前言" data-title="Android Studio 前言" data-url="https://github.com/iFarSeer/2015/09/21/Android Studio 前言/"></div>
+	<div class="ds-thread" data-thread-key="回顾设计模式之工厂模式2[工厂方法]" data-title="回顾设计模式之工厂模式2[工厂方法]" data-url="https://github.com/iFarSeer/2016/04/12/回顾设计模式之工厂模式2[工厂方法]/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

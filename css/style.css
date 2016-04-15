@@ -949,6 +949,7 @@ a {
 .article-header {
   border-left: 5px solid;
   padding: 15px 0px 15px 25px;
+  color: #fff;
 }
 .article-info.info-on-right {
   margin: 10px 0 0 0;
@@ -987,7 +988,7 @@ a {
   border-left: 5px solid #ccc;
   padding: 15px 20px;
   margin-top: 10px;
-  border-left: 5px solid #657b83;
+  border-left: 5px solid #ced0d2;
   background: #f6f6f6;
 }
 .article-entry blockquote p {
@@ -1031,17 +1032,32 @@ a {
   font-weight: 300;
   color: #574c4c;
   padding-bottom: 5px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 3px solid #ddd;
 }
-.article-entry h3,
-.article-entry h4,
-.article-entry h5,
-.article-entry h6 {
-  margin-top: 20px;
-  font-weight: 300;
+.article-entry h3 {
+  margin-top: 18px;
+  font-weight: 27 0;
   color: #574c4c;
   padding-bottom: 5px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 2px solid #ddd;
+}
+.article-entry h4 {
+  margin-top: 16px;
+  font-weight: 240;
+  color: #5a5454;
+  padding-bottom: 3px;
+}
+.article-entry h5 {
+  margin-top: 14px;
+  font-weight: 200;
+  color: #696666;
+  padding-bottom: 3px;
+}
+.article-entry h6 {
+  margin-top: 12px;
+  font-weight: 160;
+  color: #837e7e;
+  padding-bottom: 3px;
 }
 .article-entry video {
   max-width: 100%;
