@@ -4,17 +4,21 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Tag: shell | 赵淑超</title>
+  <title>回顾设计模式之工厂模式3_抽象工厂 | 赵淑超</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="赵淑超">
-<meta property="og:url" content="https://github.com/iFarSeer/tags/shell/index.html">
+  <meta name="description" content="在回顾设计模式之工厂模式1_简单工厂和回顾设计模式之工厂模式2_工厂方法后，一起来学习下最后一种工厂模式—抽象工厂
+抽象工厂（Abstract Factory）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回顾设计模式之工厂模式3_抽象工厂">
+<meta property="og:url" content="https://github.com/iFarSeer/2016/04/12/回顾设计模式之工厂模式3_抽象工厂/index.html">
 <meta property="og:site_name" content="赵淑超">
-<meta property="og:description">
+<meta property="og:description" content="在回顾设计模式之工厂模式1_简单工厂和回顾设计模式之工厂模式2_工厂方法后，一起来学习下最后一种工厂模式—抽象工厂
+抽象工厂（Abstract Factory）">
+<meta property="og:updated_time" content="2016-04-26T14:03:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="赵淑超">
-<meta name="twitter:description">
+<meta name="twitter:title" content="回顾设计模式之工厂模式3_抽象工厂">
+<meta name="twitter:description" content="在回顾设计模式之工厂模式1_简单工厂和回顾设计模式之工厂模式2_工厂方法后，一起来学习下最后一种工厂模式—抽象工厂
+抽象工厂（Abstract Factory）">
   
     <link rel="alternative" href="/atom.xml" title="赵淑超" type="application/atom+xml">
   
@@ -167,57 +171,123 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-回顾设计模式之工厂模式3_抽象工厂" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/04/10/java执行linux命令和shell脚本/" class="archive-article-date">
-  	<time datetime="2016-04-10T05:52:42.000Z" itemprop="datePublished">2016-04-10</time>
+    <div class="article-meta">
+      <a href="/2016/04/12/回顾设计模式之工厂模式3_抽象工厂/" class="article-date">
+  	<time datetime="2016-04-12T14:58:59.000Z" itemprop="datePublished">2016-04-12</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/10/java执行linux命令和shell脚本/">java执行linux命令和shell脚本</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      回顾设计模式之工厂模式3_抽象工厂
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
 	</div>
 
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
+        
 
-
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </div>
+      
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        
+          <p>在<a href="http://ifarseer.github.io//2016/04/14/%E5%9B%9E%E9%A1%BE%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F1_%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82/" target="_blank" rel="external">回顾设计模式之工厂模式1_简单工厂</a>和<a href="http://ifarseer.github.io/2016/04/17/%E5%9B%9E%E9%A1%BE%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F2_%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95/" target="_blank" rel="external">回顾设计模式之工厂模式2_工厂方法</a>后，一起来学习下最后一种工厂模式—<code>抽象工厂</code></p>
+<h3 id="抽象工厂（Abstract-Factory）"><a href="#抽象工厂（Abstract-Factory）" class="headerlink" title="抽象工厂（Abstract Factory）"></a>抽象工厂（Abstract Factory）</h3>
+        
+      
+    </div>
 
     
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/14/再见，曼巴——写给科比的告别信/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          再见，曼巴——写给科比的告别信
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/11/今天，我拯救了一个行业/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">今天，我拯救了一个行业</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="回顾设计模式之工厂模式3_抽象工厂" data-title="回顾设计模式之工厂模式3_抽象工厂" data-url="https://github.com/iFarSeer/2016/04/12/回顾设计模式之工厂模式3_抽象工厂/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cczscq"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 </div>
       <footer id="footer">
@@ -243,9 +313,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false
 	}

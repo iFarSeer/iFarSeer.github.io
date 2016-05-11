@@ -105,7 +105,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Android-Studio/" style="font-size: 20px;">Android Studio</a> <a href="/tags/gradle/" style="font-size: 16.67px;">gradle</a> <a href="/tags/realm/" style="font-size: 13.33px;">realm</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/体育/" style="font-size: 10px;">体育</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/设计模式/" style="font-size: 13.33px;">设计模式</a>
+						<a href="/tags/Android-Studio/" style="font-size: 20px;">Android Studio</a> <a href="/tags/Dagger2/" style="font-size: 10px;">Dagger2</a> <a href="/tags/gradle/" style="font-size: 17.5px;">gradle</a> <a href="/tags/realm/" style="font-size: 12.5px;">realm</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/体育/" style="font-size: 10px;">体育</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a>
 					</div>
 				</section>
 				
@@ -168,6 +168,69 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-dagger2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/09/dagger2/" class="article-date">
+  	<time datetime="2016-05-09T08:48:22.000Z" itemprop="datePublished">2016-05-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/09/dagger2/">Dagger2工作流程分析</a>
+    </h1>
+  
+
+      </header>
+      
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        
+          <p>在<a href="https://github.com/iFarSeer/TodoFluxArchitecture">TodoFluxArchitecture</a>中使用Dagger2来完成依赖注入工作。Dagger2的上手比较难，深入的理解Dagger2是如何工作实在必行。这边文章主要以<a href="https://github.com/iFarSeer/TodoFluxArchitecture">TodoFluxArchitecture</a>中如何使用Dagger2做详细的介绍。文章中的代码块中只保留与Dagger2相关代码,如果分析有偏差,欢迎拍砖~~~</p>
+        
+      
+    </div>
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dagger2/">Dagger2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/依赖注入/">依赖注入</a></li></ul>
+	</div>
+
+      
+
+        <p class="article-more-link">
+          <a  href="/2016/05/09/dagger2/#more">阅读全文... </a>
+        </p>
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-一个鸡蛋的暴走" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -261,7 +324,7 @@
       
         
         
-          <p>在<a href="http://ifarseer.github.io//2016/04/14/%E5%9B%9E%E9%A1%BE%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F1_%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82/" target="_blank" rel="external">回顾设计模式之工厂模式1(简单工厂)</a>中，所有的<code>产品</code>(Hamburg)的实例化都是在SimpleFactory中完成。想想这样的场景，KFC和McDonald等等商家都销售Hamburg，<strong>每个商家的Hamburg又各具特色</strong>。我们的SimpleFactory是不是要被改疯的节奏？回顾<code>工厂方法</code>后，我们就不再怕怕啦~~~</p>
+          <p>在<a href="http://ifarseer.github.io//2016/04/14/%E5%9B%9E%E9%A1%BE%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F1_%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82/" target="_blank" rel="external">回顾设计模式之工厂模式1_简单工厂</a>中，所有的<code>产品</code>(Hamburg)的实例化都是在SimpleFactory中完成。想想这样的场景，KFC和McDonald等等商家都销售Hamburg，<strong>每个商家的Hamburg又各具特色</strong>。我们的SimpleFactory是不是要被改疯的节奏？回顾<code>工厂方法</code>后，我们就不再怕怕啦~~~</p>
         
       
     </div>
@@ -404,6 +467,69 @@
 
         <p class="article-more-link">
           <a  href="/2016/04/14/再见，曼巴——写给科比的告别信/#more">阅读全文... </a>
+        </p>
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-回顾设计模式之工厂模式3_抽象工厂" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/12/回顾设计模式之工厂模式3_抽象工厂/" class="article-date">
+  	<time datetime="2016-04-12T14:58:59.000Z" itemprop="datePublished">2016-04-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/12/回顾设计模式之工厂模式3_抽象工厂/">回顾设计模式之工厂模式3_抽象工厂</a>
+    </h1>
+  
+
+      </header>
+      
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        
+          <p>在<a href="http://ifarseer.github.io//2016/04/14/%E5%9B%9E%E9%A1%BE%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F1_%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82/" target="_blank" rel="external">回顾设计模式之工厂模式1_简单工厂</a>和<a href="http://ifarseer.github.io/2016/04/17/%E5%9B%9E%E9%A1%BE%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F2_%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95/" target="_blank" rel="external">回顾设计模式之工厂模式2_工厂方法</a>后，一起来学习下最后一种工厂模式—<code>抽象工厂</code></p>
+        
+      
+    </div>
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+	</div>
+
+      
+
+        <p class="article-more-link">
+          <a  href="/2016/04/12/回顾设计模式之工厂模式3_抽象工厂/#more">阅读全文... </a>
         </p>
       <div class="clearfix"></div>
     </div>
@@ -668,140 +794,6 @@
 
         <p class="article-more-link">
           <a  href="/2015/10/08/Android Studio 基础篇六 Build Variants/#more">阅读全文... </a>
-        </p>
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android Studio 基础篇五 productFlavors" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/08/Android Studio 基础篇五 productFlavors/" class="article-date">
-  	<time datetime="2015-10-08T03:46:28.000Z" itemprop="datePublished">2015-10-08</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/08/Android Studio 基础篇五 productFlavors/">Android Studio 基础篇五 productFlavors</a>
-    </h1>
-  
-
-      </header>
-      
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-        
-          <h3 id="productFlavors"><a href="#productFlavors" class="headerlink" title="productFlavors"></a>productFlavors</h3><p>使用productFlavors可以为一个项目定义不同的自定义版本，一个单一的项目可以同时定义多个不同的productFlavors，来改变项目的输出。productFlavors概念是为了解决不同版本之间差异，生成多个定制的版本，输出的应用可以使一个应用，也可以是差异性不大的应用。</p>
-        
-      
-    </div>
-
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gradle/">gradle</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Android/">Android</a>
-	</div>
-
-
-        <p class="article-more-link">
-          <a  href="/2015/10/08/Android Studio 基础篇五 productFlavors/#more">阅读全文... </a>
-        </p>
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android Studio 基础篇四 BuildTypes" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/09/29/Android Studio 基础篇四 BuildTypes/" class="article-date">
-  	<time datetime="2015-09-29T05:29:54.000Z" itemprop="datePublished">2015-09-29</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/29/Android Studio 基础篇四 BuildTypes/">Android Studio 基础篇四 BuildTypes</a>
-    </h1>
-  
-
-      </header>
-      
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-        
-          <h3 id="BuildTypes"><a href="#BuildTypes" class="headerlink" title="BuildTypes"></a>BuildTypes</h3><p>默认情况下，Android Plugin会自动给项目设置同时构建应用程序的debug和release版本。当然，开发者也可以根据具体需求自定义新的BuildType。</p>
-        
-      
-    </div>
-
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gradle/">gradle</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Android/">Android</a>
-	</div>
-
-
-        <p class="article-more-link">
-          <a  href="/2015/09/29/Android Studio 基础篇四 BuildTypes/#more">阅读全文... </a>
         </p>
       <div class="clearfix"></div>
     </div>
