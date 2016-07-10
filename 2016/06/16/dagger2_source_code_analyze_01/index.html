@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Dagger2源码分析(上) | 赵淑超</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在Dagger2工作流程分析中，我们认识了@Module, @Component, @Provides, @Inject, @Named等注解。现在我们一起深入下Dagger2是如何生成一系列代码。
+准备推荐文章。
+javax-inject
+Java 依赖注入标准（JSR-330）简介;
+公共技术点之 Java 注解 Annotation。
+
+在Java领域内，很多前辈很早已经在做依赖注入的研究与">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dagger2源码分析(上)">
+<meta property="og:url" content="https://github.com/iFarSeer/2016/06/16/dagger2_source_code_analyze_01/index.html">
+<meta property="og:site_name" content="赵淑超">
+<meta property="og:description" content="在Dagger2工作流程分析中，我们认识了@Module, @Component, @Provides, @Inject, @Named等注解。现在我们一起深入下Dagger2是如何生成一系列代码。
+准备推荐文章。
+javax-inject
+Java 依赖注入标准（JSR-330）简介;
+公共技术点之 Java 注解 Annotation。
+
+在Java领域内，很多前辈很早已经在做依赖注入的研究与">
+<meta property="og:image" content="https://github.com/iFarSeer/img/dagger2_source_code0.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/dagger2_source_code1.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/dagger2_source_code2.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/dagger2_source_code3.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/dagger2_source_code4.png">
+<meta property="og:updated_time" content="2016-07-10T10:18:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dagger2源码分析(上)">
+<meta name="twitter:description" content="在Dagger2工作流程分析中，我们认识了@Module, @Component, @Provides, @Inject, @Named等注解。现在我们一起深入下Dagger2是如何生成一系列代码。
+准备推荐文章。
+javax-inject
+Java 依赖注入标准（JSR-330）简介;
+公共技术点之 Java 注解 Annotation。
+
+在Java领域内，很多前辈很早已经在做依赖注入的研究与">
+<meta name="twitter:image" content="https://github.com/iFarSeer/img/dagger2_source_code0.png">
+  
+    <link rel="alternative" href="/atom.xml" title="赵淑超" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/zhaosc.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/zhaosc.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">赵淑超</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/iFarSeer" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="mailto:farseer.spade@gmail.com" title="mail">mail</a>
+					        
+								<a class="google" target="_blank" href="https://plus.google.com/117233387937781187519" title="google">google</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Android-Studio/" style="font-size: 20px;">Android Studio</a> <a href="/tags/Dagger2/" style="font-size: 12.5px;">Dagger2</a> <a href="/tags/gradle/" style="font-size: 17.5px;">gradle</a> <a href="/tags/realm/" style="font-size: 12.5px;">realm</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/体育/" style="font-size: 10px;">体育</a> <a href="/tags/依赖注入/" style="font-size: 12.5px;">依赖注入</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">一个程序员，安静，专注，认真... 其实，基情，213才是真正的我~</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">赵淑超</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/zhaosc.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">赵淑超</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/iFarSeer" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:farseer.spade@gmail.com" title="mail">mail</a>
+			        
+						<a class="google" target="_blank" href="https://plus.google.com/117233387937781187519" title="google">google</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-dagger2_source_code_analyze_01" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/16/dagger2_source_code_analyze_01/" class="article-date">
+  	<time datetime="2016-06-16T09:05:41.000Z" itemprop="datePublished">2016-06-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Dagger2源码分析(上)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dagger2/">Dagger2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/依赖注入/">依赖注入</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        
+          <p>在<a href="http://ifarseer.github.io/2016/05/09/dagger2/" target="_blank" rel="external">Dagger2工作流程分析</a>中，我们认识了@Module, @Component, @Provides, @Inject, @Named等注解。现在我们一起深入下Dagger2是如何生成一系列代码。</p>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><h4 id="推荐文章。"><a href="#推荐文章。" class="headerlink" title="推荐文章。"></a>推荐文章。</h4><ul>
+<li><a href="https://github.com/javax-inject/javax-inject">javax-inject</a></li>
+<li><a href="http://blog.csdn.net/DL88250/article/details/4838803" target="_blank" rel="external">Java 依赖注入标准（JSR-330）简介</a>;</li>
+<li><a href="http://a.codekk.com/detail/Android/Trinea/%E5%85%AC%E5%85%B1%E6%8A%80%E6%9C%AF%E7%82%B9%E4%B9%8B%20Java%20%E6%B3%A8%E8%A7%A3%20Annotation" target="_blank" rel="external">公共技术点之 Java 注解 Annotation</a>。</li>
+</ul>
+<p>在Java领域内，很多前辈很早已经在做依赖注入的研究与实现，在前辈探索过总结出一些标准，Dagger2作为后来者，必定会跟随前辈的步伐。JSR-330是前辈们总结面向依赖注入使用者的规范，大家需要去了解下。</p>
+<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><p>google在实现Dagger2时，依赖了部分已经比较稳定和完善google的开源库。所以我们需要准备一下源码。</p>
+<ul>
+<li><a href="https://github.com/google/dagger">Dagger2</a>;</li>
+<li><a href="https://github.com/google/auto">auto</a>;</li>
+<li><a href="https://github.com/square/javapoet">javapoet</a></li>
+</ul>
+<p>Dagger2依赖<code>auto</code>库中的<code>common</code>,<code>auto-value</code>和<code>auto-service</code>；<br>javapoet是square团队的杰作，使用javapoet可以方便的通过注解生成java源码；</p>
+<h3 id="初步看看"><a href="#初步看看" class="headerlink" title="初步看看"></a>初步看看</h3><p>clone Dagger2的源码后，我们会看到以下目录结构：<br><img src="/img/dagger2_source_code0.png" alt="Dagger2的目录结构"></p>
+<p>目前我们只需要关注<code>core</code>和<code>compiler</code>中的主要代码。</p>
+<p>在<code>core</code>中定义了支持的自定义注解如下图（除去MembersInjector.java,package-info.java）。<br><img src="/img/dagger2_source_code1.png" alt="Dagger2的目录结构"></p>
+<p>以上这些注解的作用以及使用方法在文档中都有，在这里不赘述。</p>
+<p><code>compiler</code>是本次分析的重点，这里完成注解的具体处理策略。</p>
+<h3 id="核心源码分析"><a href="#核心源码分析" class="headerlink" title="核心源码分析"></a>核心源码分析</h3><p>大家知道Dagger2时在编译时通过分析注解完成依赖注入工作，首先我们来定位下处理注解入口。<br>我们可以从Dagger2使用google自家的<code>auto-common</code>,<code>auto-service</code>和<code>auto-value</code>下手。<br>打开<a href="https://github.com/google/auto">auto源码</a>去看看。<br><img src="/img/dagger2_source_code2.png" alt="auto开源项目"><br>我们把焦点放在<code>common</code>中的BasicAnnotationProcessor.java和<code>service</code>中的AutoService.java上。</p>
+<h4 id="BasicAnnotationProcessor的核心代码分析："><a href="#BasicAnnotationProcessor的核心代码分析：" class="headerlink" title="BasicAnnotationProcessor的核心代码分析："></a>BasicAnnotationProcessor的核心代码分析：</h4><p><a href="https://github.com/google/auto/blob/master/common/src/main/java/com/google/auto/common/BasicAnnotationProcessor.java">BasicAnnotationProcessor的源码地址</a></p>
+<ul>
+<li>内部接口ProcessingStep,其中annotations方法用于指定ProcessingStep支持处理的注解，process方法用于确定每个注解的处理方式；</li>
+<li>BasicAnnotationProcessor.java是一个抽象类，抽象方法initSteps，用于指定具体的注解处理步骤；</li>
+<li>BasicAnnotationProcessor继承自AbstractProcessor，实现<code>public final ImmutableSet&lt;String&gt; getSupportedAnnotationTypes()</code>和<code>public final boolean process(Set&lt;? extends TypeElement&gt; annotations, RoundEnvironment roundEnv)</code>方法,确定BasicAnnotationProcessor是对注解处理的具体实现的父类；</li>
+<li><code>private void process(ImmutableSetMultimap&lt;Class&lt;? extends Annotation&gt;, Element&gt; validElements)</code>是最核心的方法，其中循环ProcessingSteps，依次处理每个step的annotations和process，<a href="https://github.com/google/auto/blob/master/common/src/main/java/com/google/auto/common/BasicAnnotationProcessor.java">详细见源码</a>。</li>
+</ul>
+<h4 id="ComponentProcessor的核心代码分析："><a href="#ComponentProcessor的核心代码分析：" class="headerlink" title="ComponentProcessor的核心代码分析："></a>ComponentProcessor的核心代码分析：</h4><p><a href="https://github.com/google/dagger/blob/master/compiler/src/main/java/dagger/internal/codegen/ComponentProcessor.java">ComponentProcessor的源码地址</a></p>
+<p><img src="/img/dagger2_source_code3.png" alt="ComponentProcessor代码"><br>ComponentProcessor继承自BasicAnnotationProcessor，实现initSteps和postProcess方法。除此之外，还使用AutoService注解修饰。<br>其中initSteps中返回内容如下：<br><img src="/img/dagger2_source_code4.png" alt="ComponentProcessor代码"><br><strong>初步结论：</strong><br><strong>Dagger2把所有注解的处理拆分成上图这些步骤，按照步骤依次执行，生成相关的java代码。其中每个ProcessingStep的任务相关独立。</strong></p>
+
+        
+      
+    </div>
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/09/dagger2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Dagger2工作流程分析</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="dagger2_source_code_analyze_01" data-title="Dagger2源码分析(上)" data-url="https://github.com/iFarSeer/2016/06/16/dagger2_source_code_analyze_01/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cczscq"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 赵淑超
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
