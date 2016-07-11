@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Android与WebView交互新解 | 赵淑超</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="我相信从事Android开发的小伙伴们，都完成过native和WebView中js通信的相关开发任务。
+最常见通信方案Android中开发JavascriptInterface代码：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253public class">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android与WebView交互新解">
+<meta property="og:url" content="https://github.com/iFarSeer/2016/07/11/android-jssdk-mind/index.html">
+<meta property="og:site_name" content="赵淑超">
+<meta property="og:description" content="我相信从事Android开发的小伙伴们，都完成过native和WebView中js通信的相关开发任务。
+最常见通信方案Android中开发JavascriptInterface代码：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253public class">
+<meta property="og:image" content="https://github.com/iFarSeer/img/android_jssdk_mind_01.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/android_jssdk_mind_02.gif">
+<meta property="og:image" content="https://github.com/iFarSeer/img/android_jssdk_mind_03.gif">
+<meta property="og:updated_time" content="2016-07-11T12:50:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android与WebView交互新解">
+<meta name="twitter:description" content="我相信从事Android开发的小伙伴们，都完成过native和WebView中js通信的相关开发任务。
+最常见通信方案Android中开发JavascriptInterface代码：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253public class">
+<meta name="twitter:image" content="https://github.com/iFarSeer/img/android_jssdk_mind_01.png">
+  
+    <link rel="alternative" href="/atom.xml" title="赵淑超" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/zhaosc.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/zhaosc.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">赵淑超</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/iFarSeer" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="mailto:farseer.spade@gmail.com" title="mail">mail</a>
+					        
+								<a class="google" target="_blank" href="https://plus.google.com/117233387937781187519" title="google">google</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Android/" style="font-size: 12.5px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 20px;">Android Studio</a> <a href="/tags/AndroidJSSDKCore/" style="font-size: 10px;">AndroidJSSDKCore</a> <a href="/tags/Dagger2/" style="font-size: 12.5px;">Dagger2</a> <a href="/tags/gradle/" style="font-size: 17.5px;">gradle</a> <a href="/tags/realm/" style="font-size: 12.5px;">realm</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/体育/" style="font-size: 10px;">体育</a> <a href="/tags/依赖注入/" style="font-size: 12.5px;">依赖注入</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">一个程序员，安静，专注，认真... 其实，基情，213才是真正的我~</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">赵淑超</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/zhaosc.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">赵淑超</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/iFarSeer" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:farseer.spade@gmail.com" title="mail">mail</a>
+			        
+						<a class="google" target="_blank" href="https://plus.google.com/117233387937781187519" title="google">google</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-android-jssdk-mind" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/11/android-jssdk-mind/" class="article-date">
+  	<time datetime="2016-07-11T10:43:56.000Z" itemprop="datePublished">2016-07-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android与WebView交互新解
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AndroidJSSDKCore/">AndroidJSSDKCore</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        
+          <p>我相信从事Android开发的小伙伴们，都完成过native和WebView中js通信的相关开发任务。</p>
+<h3 id="最常见通信方案"><a href="#最常见通信方案" class="headerlink" title="最常见通信方案"></a>最常见通信方案</h3><p>Android中开发JavascriptInterface代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JSWebView</span> <span class="keyword">extends</span> <span class="title">WebView</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JSWebView</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context);</span><br><span class="line">        init(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JSWebView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs);</span><br><span class="line">        init(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JSWebView</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyleAttr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs, defStyleAttr);</span><br><span class="line">        init(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@SuppressLint</span>(<span class="string">"SetJavaScriptEnabled"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        setVerticalScrollBarEnabled(<span class="keyword">false</span>);</span><br><span class="line">        setHorizontalScrollBarEnabled(<span class="keyword">false</span>);</span><br><span class="line">        getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);</span><br><span class="line">        getSettings().setDomStorageEnabled(<span class="keyword">true</span>);</span><br><span class="line">        getSettings().setAppCacheEnabled(<span class="keyword">true</span>);</span><br><span class="line">        getSettings().setAllowContentAccess(<span class="keyword">true</span>);</span><br><span class="line">        getSettings().setJavaScriptCanOpenWindowsAutomatically(<span class="keyword">true</span>);</span><br><span class="line"> </span><br><span class="line"> 		addJavascriptInterface(<span class="keyword">this</span>, <span class="string">"farseer"</span>);</span><br><span class="line">        <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.KITKAT) &#123;</span><br><span class="line">            WebView.setWebContentsDebuggingEnabled(<span class="keyword">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@JavascriptInterface</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getUserToken</span><span class="params">(String json)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            JSONObject params = <span class="keyword">new</span> JSONObject(json);</span><br><span class="line">            String userId = params.getString(<span class="string">"userId"</span>);</span><br><span class="line">            String callback = params.getString(<span class="string">"callback"</span>);</span><br><span class="line"></span><br><span class="line">            String userToken = String.format(<span class="string">"%s 's Token"</span>, userId);</span><br><span class="line">            JSONObject result = <span class="keyword">new</span> JSONObject();</span><br><span class="line">            result.put(<span class="string">"userId"</span>, userId);</span><br><span class="line">            result.put(<span class="string">"userToken"</span>, userToken);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//执行javascript回调</span></span><br><span class="line">            loadUrl(<span class="string">"javascript:"</span> + callback + <span class="string">"("</span> +  result.toString() + <span class="string">")"</span>);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (JSONException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Html和javascript代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE HTML&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>AndroidJSSDK<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span><br><span class="line"></span><br><span class="line">function getTokenCallback(params) &#123;</span><br><span class="line">  console.log(JSON.parse(params).token);</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"blog-header"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h3</span>&gt;</span>最常见通信方案<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"entry"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        获取用户Token测试用例<span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"farseer.getUserToken(JSON.stringify(&#123;'userId':'farseer','callback':'getUserTokenCallback'&#125;));"</span>&gt;</span>测试<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>通过以上两段测试代码，我们大Android程序员便可以轻松的实现native与javascript通信。<br>一般的开发流程为：</p>
+<ol>
+<li>定义以及实现native的接口方法farseer.getUserToken(json),以及参数规范;</li>
+<li>定义以及实现javascript的回调方法getTokenCallback，以及参数规范;</li>
+<li>两端联调，自测；</li>
+</ol>
+<p>以上方式存在缺点如下：</p>
+<ul>
+<li>javascript对native过度依赖，面对JavascriptInterface中的方法，native程序员连修改方法名称的权利都被剥夺;</li>
+<li>两端通信的参数规范需要统一;</li>
+<li>native需要关注回调javascript方法，没有从javascript中解脱出来，在复杂业务中，回调情况也可能不统一；</li>
+</ul>
+<p>总结起来，native开发人员和js程序员交叉过多，依赖过重，这种模式下，极大的限制了我们开发同学的发挥空间。</p>
+<h3 id="可以尝试的想法"><a href="#可以尝试的想法" class="headerlink" title="可以尝试的想法"></a>可以尝试的想法</h3><p>我们可以尝试建立一套协议，native和js都面向通信协议编程，彼此保持黑盒状态。同时也可以通过协议更方便的完成单元测试。</p>
+<p>javascript代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义callback缓存</span></span><br><span class="line"><span class="keyword">var</span> callbackCache = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">//通信协议方法</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reqeustUserToken</span>(<span class="params">params, callback</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//保留callback</span></span><br><span class="line">  callbackCache.reqeustUserToken = callback;</span><br><span class="line">  nativeInterface(params);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>html代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"reqeustUserToken(JSON.stringify(&#123;'userId':'farseer'&#125;), function(params)&#123;</span><br><span class="line">             console.log('response:' + JSON.parse(params).token);</span><br><span class="line">         &#125;);"</span>&gt;</span>测试<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在上述代码中，html直接调用通讯协议方法reqeustUserToken，第一个参数为数据参数params，第二个参数为回调callback。reqeustUserToken先把callback保存到callbackCache中，之后调用native方法nativeInterface。暂时我们可以把nativeInterface看做native向js开放的接口方法的伪代码。至于callback的调用，可以通过webView来完成调用。</p>
+<p>看到上述通信协议，你可能存在疑问，这样与最常见的通信方案，差别不是很大。的确如此，那么让我们来进一步升级。</p>
+<p>我们完全可以把通信协议方法和callbackCache通过js注入的方式完成初始化，我们可以通过浏览器控制台动态的注入js来验证。<br><img src="/img/android_jssdk_mind_01.png" alt="控制台验证"></p>
+<p>上图是测试下来的结果，在浏览器中完全可以动态的注入js，html使用动态注入的js完成具体业务。那么，在手机端WebView是否可行呢？</p>
+<p>等等…还有一个问题：为什么需要动态的注入js，这样做意义是什么呢？<br>我们使用动态注入技术的js方法都是通信协议方法。我的期望是通信协议的具体代码对前端开发者不可见，也没有必要了解，前端开发者唯一要做的是根据通信协议文档了解如果使用native开放出的功能。面对通信协议开发，把两端的开发人员彼此解放出来。</p>
+<h3 id="移动端初步实践"><a href="#移动端初步实践" class="headerlink" title="移动端初步实践"></a>移动端初步实践</h3><p>直接上段代码来看看。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JsFormator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getEvalJavascript</span><span class="params">(String javascriptContent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> String.format(<span class="string">"javascript:%s;"</span>, javascriptContent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 获得生成命名空间方法的javascript.</span><br><span class="line">     *</span><br><span class="line">     * if (typeof Namespace == "undefined") &#123;</span><br><span class="line">     *     var Namespace = new Object();</span><br><span class="line">     * &#125;</span><br><span class="line">     *</span><br><span class="line">     * if (typeof Namespace.register == "undefined") &#123;</span><br><span class="line">     *     Namespace.register = function(path) &#123;</span><br><span class="line">     *         var arr = path.split(".");</span><br><span class="line">     *         var ns = "";</span><br><span class="line">     *         for (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">     *             if (i &gt; 0) &#123;</span><br><span class="line">     *                 ns += ".";</span><br><span class="line">     *             &#125;</span><br><span class="line">     *             ns += arr[i];</span><br><span class="line">     *             eval("if(typeof(" + ns + ") == 'undefined') " + ns + " = new Object();");</span><br><span class="line">     *         &#125;</span><br><span class="line">     *     &#125;</span><br><span class="line">     * &#125;</span><br><span class="line">     *</span><br><span class="line">     * Namespace.register("com.farseer");</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@return</span> 生成命名空间方法的javascript</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getNamespaceJavascript</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"if (typeof Namespace == \"undefined\") &#123;\n"</span> +</span><br><span class="line">                <span class="string">"\tvar Namespace = new Object();\n"</span> +</span><br><span class="line">                <span class="string">"&#125;\n"</span> +</span><br><span class="line">                <span class="string">"if (typeof Namespace.register == \"undefined\") &#123;\n"</span> +</span><br><span class="line">                <span class="string">"\tNamespace.register = function(path) &#123;\n"</span> +</span><br><span class="line">                <span class="string">"\t    var arr = path.split(\".\");\n"</span> +</span><br><span class="line">                <span class="string">"\t    var ns = \"\";\n"</span> +</span><br><span class="line">                <span class="string">"\t    for (var i = 0; i &lt; arr.length; i++) &#123;\n"</span> +</span><br><span class="line">                <span class="string">"\t        if (i &gt; 0) &#123;\n"</span> +</span><br><span class="line">                <span class="string">"\t            ns += \".\";\n"</span> +</span><br><span class="line">                <span class="string">"\t        &#125;\n"</span> +</span><br><span class="line">                <span class="string">"\t        ns += arr[i];\n"</span> +</span><br><span class="line">                <span class="string">"\t        eval(\"if(typeof(\" + ns + \") == \\\"undefined\\\") \" + ns + \" = new Object();\");\n"</span> +</span><br><span class="line">                <span class="string">"\t    &#125;\n"</span> +</span><br><span class="line">                <span class="string">"\t&#125;\t\n"</span> +</span><br><span class="line">                <span class="string">"&#125;\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 获得执行注册命名空间的javascript.</span><br><span class="line">     *</span><br><span class="line">     * 例如:</span><br><span class="line">     * Namespace.register('ITOMIX.Dialog');</span><br><span class="line">     * if (typeof DialogCallbackCache == 'undefined') &#123;</span><br><span class="line">     *     var DialogCallbackCache = new Object();</span><br><span class="line">     * &#125;</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@param</span> namespace     命名空间</span><br><span class="line">     * <span class="doctag">@param</span> moduleName    模块名称</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@return</span> 注册命名空间的javascript</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getRegisterNamespaceJavascript</span><span class="params">(String namespace, String moduleName)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// CommonCallbackCache</span></span><br><span class="line">        String jsCallbackCacheName = getJsCallbackCacheName(moduleName);</span><br><span class="line">        <span class="keyword">return</span> String.format(<span class="string">"Namespace.register('%s.%s');\n"</span> +</span><br><span class="line">                <span class="string">"if (typeof %s == 'undefined') &#123;\n"</span> +</span><br><span class="line">                <span class="string">"        var %s = new Object();\n"</span> +</span><br><span class="line">                <span class="string">"&#125;"</span>, namespace, moduleName, jsCallbackCacheName, jsCallbackCacheName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 获得注入js方法的javascript.</span><br><span class="line">     *</span><br><span class="line">     * 例如:</span><br><span class="line">     * if (typeof cn.farseer.Common.toast == 'undefined') &#123;</span><br><span class="line">     *     var cn.farseer.Common.toast  = function(params, callback) &#123;</span><br><span class="line">     *         console.log('Common cn.farseer.Common.toast  inject begin');</span><br><span class="line">     *         Common_callbacks['cn.farseer.Common.toast'] = callback;</span><br><span class="line">     *         Common.toast(params);</span><br><span class="line">     *         console.log('Common cn.farseer.Common.toast  inject end');</span><br><span class="line">     *     &#125;;</span><br><span class="line">     * &#125;</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@param</span> namespace         命名空间</span><br><span class="line">     * <span class="doctag">@param</span> moduleName        模块名称</span><br><span class="line">     * <span class="doctag">@param</span> functionName      js方法名称</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@return</span> 注入js方法的javascript</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getJsFunctionInitJavascript</span><span class="params">(String namespace, String moduleName, String functionName)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// com.farseer.Common.toast</span></span><br><span class="line">        String jsVariableName = getJsVariableName(namespace, moduleName, functionName);</span><br><span class="line">        <span class="comment">// CommonCallbackCache</span></span><br><span class="line">        String jsCallbackCacheName = getJsCallbackCacheName(moduleName);</span><br><span class="line">        <span class="comment">// Common.toast</span></span><br><span class="line">        String nativeFunctionName = getNativeFunctionName(moduleName, functionName);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> String.format(<span class="string">"if (typeof %s == 'undefined') &#123;\n"</span> +</span><br><span class="line">                        <span class="string">"\t%s = function(params, callback) \n"</span> +</span><br><span class="line">                        <span class="string">"\t&#123;\n"</span> +</span><br><span class="line">                        <span class="string">"\t\tconsole.log('%s inject begin'); \n"</span> +</span><br><span class="line">                        <span class="string">"\t\t%s['%s'] = callback;\n"</span> +</span><br><span class="line">                        <span class="string">"\t\t%s(params); \n"</span> +</span><br><span class="line">                        <span class="string">"\t\tconsole.log('%s inject end');\n"</span> +</span><br><span class="line">                        <span class="string">"\t&#125;;\n"</span> +</span><br><span class="line">                        <span class="string">"&#125;"</span>, jsVariableName, jsVariableName, jsVariableName, jsCallbackCacheName, functionName, nativeFunctionName, jsVariableName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 获得执行callback方法的javascript.</span><br><span class="line">     *</span><br><span class="line">     * 例如:</span><br><span class="line">     * if (typeof Common_callbacks['toast'] != "undefined") &#123;</span><br><span class="line">     *     Common_callbacks['toast'](params);</span><br><span class="line">     *     delete Common_callbacks['%s'];</span><br><span class="line">     * &#125;</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@param</span> moduleName        模块名称</span><br><span class="line">     * <span class="doctag">@param</span> functionName      js方法名称</span><br><span class="line">     * <span class="doctag">@param</span>  json             回调参数,数据格式为json</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@return</span> callback方法的javascript</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getCallbackJavascript</span><span class="params">(String moduleName, String functionName, String json)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// CommonCallbackCache</span></span><br><span class="line">        String jsCallbackCacheName = getJsCallbackCacheName(moduleName);</span><br><span class="line">        <span class="keyword">return</span> String.format(<span class="string">"if (typeof %s['%s'] != 'undefined') &#123;\n"</span> +</span><br><span class="line">                <span class="string">"\t%s['%s'](%s);\n"</span> +</span><br><span class="line">                <span class="string">"\tdelete %s['%s'];\n"</span> +</span><br><span class="line">                <span class="string">"&#125;\n"</span>, jsCallbackCacheName, functionName, jsCallbackCacheName, functionName, json, jsCallbackCacheName, functionName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 获得js方法的完整名称.</span><br><span class="line">     *</span><br><span class="line">     * 例如:com.farseer.Common.toast</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@param</span> namespace         命名空间</span><br><span class="line">     * <span class="doctag">@param</span> moduleName        模块名称</span><br><span class="line">     * <span class="doctag">@param</span> functionName      js方法名称</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@return</span> js方法的完整名称.</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getJsVariableName</span><span class="params">(String namespace, String moduleName, String functionName)</span> </span>&#123;</span><br><span class="line">        StringBuilder builder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        builder.append(namespace);</span><br><span class="line">        builder.append(<span class="string">"."</span>);</span><br><span class="line">        builder.append(moduleName);</span><br><span class="line">        builder.append(<span class="string">"."</span>);</span><br><span class="line">        builder.append(functionName);</span><br><span class="line">        <span class="keyword">return</span> builder.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 获得js callback变量名称.</span><br><span class="line">     *</span><br><span class="line">     * 例如: CommonCallbackCache</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@param</span> moduleName 模块名称</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@return</span> js callback变量名称</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getJsCallbackCacheName</span><span class="params">(String moduleName)</span> </span>&#123;</span><br><span class="line">        StringBuilder builder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        builder.append(moduleName);</span><br><span class="line">        builder.append(<span class="string">"CallbackCache"</span>);</span><br><span class="line">        <span class="keyword">return</span> builder.toString();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 获得本地方法完整名称.</span><br><span class="line">     *</span><br><span class="line">     * 例如:Common.toast</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@param</span> moduleName        模块名称</span><br><span class="line">     * <span class="doctag">@param</span> functionName      js方法名称</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@return</span> 本地方法完整名称</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getNativeFunctionName</span><span class="params">(String moduleName, String functionName)</span> </span>&#123;</span><br><span class="line">        StringBuilder builder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        builder.append(moduleName);</span><br><span class="line">        builder.append(<span class="string">"."</span>);</span><br><span class="line">        builder.append(functionName);</span><br><span class="line">        <span class="keyword">return</span> builder.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这段代码主要是动态注入js的模板，<a href="https://github.com/iFarSeer/AndroidJSSDKCore/blob/master/jssdk/src/main/java/com/farseer/jssdk/internal/JsFormator.java">具体源码地址</a>，简述下动态注入js时需要考虑的细节：</p>
+<ul>
+<li>按模块注入通信方法，每个通信方法保持独立；</li>
+<li>按模块区分通信方法的回调；</li>
+<li>支持多次注入；</li>
+<li>支持命名空间，防止命名污染；</li>
+</ul>
+<h3 id="移动端最终实现"><a href="#移动端最终实现" class="headerlink" title="移动端最终实现"></a>移动端最终实现</h3><p>基于上述native与js通信想法，完成<a href="https://github.com/iFarSeer/AndroidJSSDKCore">AndroidJSSDKCore</a>，我们可以基于<a href="https://github.com/iFarSeer/AndroidJSSDKCore">AndroidJSSDKCore</a>快速开发出多个native与js通信的模块。</p>
+<p>基于<a href="https://github.com/iFarSeer/AndroidJSSDKCore">AndroidJSSDKCore</a>，设计完成的<a href="https://github.com/iFarSeer/AndroidJSSDKCommon">AndroidJSSDKCommon</a>和<a href="https://github.com/iFarSeer/AndroidJSSDKDialog">AndroidJSSDKDialog</a>。<br>我们可以<a href="https://github.com/iFarSeer/AndroidJSSDKDialog">AndroidJSSDKDialog</a>简单描述下，如何基于<a href="https://github.com/iFarSeer/AndroidJSSDKCore">AndroidJSSDKCore</a>快速完成一个模块。</p>
+<h4 id="定义通信模块"><a href="#定义通信模块" class="headerlink" title="定义通信模块"></a>定义通信模块</h4><p>模块名称为Dialog，默认命名空间为<code>com.farseer</code>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Module</span>(name = <span class="string">"Dialog"</span>, namespace = <span class="string">"com.farseer"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DialogJsModule</span> <span class="keyword">extends</span> <span class="title">JSModule</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DialogJsModule</span><span class="params">(Context context, Dispatcher dispatcher, String moduleName, String namespace)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, dispatcher, moduleName, namespace);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (String function : Constants.FUNCTION_LIST) &#123;</span><br><span class="line">            addJSFunction(function);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@JavascriptInterface</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">normalDialog</span><span class="params">(String json)</span> </span>&#123;</span><br><span class="line">        NormalDialogEvent dialogEvent = <span class="keyword">new</span> NormalDialogEvent(getName(), Constants.NOOMAL_DIALOG);</span><br><span class="line">        dialogEvent.processData(json);</span><br><span class="line">        postEvent(dialogEvent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在<a href="https://github.com/iFarSeer/AndroidJSSDKCore">AndroidJSSDKCore</a>中定义注解Module和基类JSModule。normalDialog是模块Dialog真正向js开放的通信接口。</p>
+<h4 id="定义通信事件"><a href="#定义通信事件" class="headerlink" title="定义通信事件"></a>定义通信事件</h4><p>通信事件是通信协议方法处理的载体，在整理设计中，我把事件来源和事件处理器分离，充分去解耦。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NormalDialogEvent</span> <span class="keyword">extends</span> <span class="title">JSEvent</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Request request;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NormalDialogEvent</span><span class="params">(String module, String function)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(module, function);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Request <span class="title">getRequest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> request;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processData</span><span class="params">(String data)</span> </span>&#123;</span><br><span class="line">        log(data);</span><br><span class="line">        request = JsonTool.fromJsonString(data, <span class="keyword">new</span> TypeToken&lt;Request&gt;() &#123;&#125;.getType());</span><br><span class="line">        <span class="keyword">if</span> (request == <span class="keyword">null</span> || !request.check()) &#123;</span><br><span class="line">            LogTool.error(String.format(<span class="string">"normalDialog 's params of the module named %s are not support"</span>, getModule()));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Request</span> </span>&#123;</span><br><span class="line">        <span class="meta">@SerializedName</span>(<span class="string">"title"</span>)</span><br><span class="line">        <span class="keyword">private</span> String title;</span><br><span class="line">        <span class="meta">@SerializedName</span>(<span class="string">"content"</span>)</span><br><span class="line">        <span class="keyword">private</span> String content;</span><br><span class="line">        <span class="meta">@SerializedName</span>(<span class="string">"positiveText"</span>)</span><br><span class="line">        <span class="keyword">private</span> String positiveText;</span><br><span class="line">        <span class="meta">@SerializedName</span>(<span class="string">"negativeText"</span>)</span><br><span class="line">        <span class="keyword">private</span> String negativeText;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getTitle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> title;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTitle</span><span class="params">(String title)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.title = title;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getContent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> content;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContent</span><span class="params">(String content)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.content = content;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getPositiveText</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> positiveText;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPositiveText</span><span class="params">(String positiveText)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.positiveText = positiveText;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getNegativeText</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> negativeText;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNegativeText</span><span class="params">(String negativeText)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.negativeText = negativeText;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">check</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (!TextUtils.isEmpty(title)</span><br><span class="line">                    &amp;&amp; !TextUtils.isEmpty(content)</span><br><span class="line">                    &amp;&amp; !TextUtils.isEmpty(positiveText)</span><br><span class="line">                    &amp;&amp; !TextUtils.isEmpty(negativeText)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Response</span> </span>&#123;</span><br><span class="line">        <span class="meta">@SerializedName</span>(<span class="string">"result"</span>)</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> result;</span><br><span class="line">        <span class="meta">@SerializedName</span>(<span class="string">"message"</span>)</span><br><span class="line">        <span class="keyword">private</span> String message;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getResult</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setResult</span><span class="params">(<span class="keyword">int</span> result)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.result = result;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> message;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.message = message;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在通信载体通信事件中，以Request，Response的形式来把客户端看做S端，把js看做C端，使模块开发者更够更好的理解以及使用。</p>
+<h4 id="定义通信事件处理器"><a href="#定义通信事件处理器" class="headerlink" title="定义通信事件处理器"></a>定义通信事件处理器</h4><p>通信事件处理器负责接收通信事件，完成客户端对事件的具体处理，以及完成具体的回调处理。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Processor</span>(name = <span class="string">"Dialog"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DialogProcessor</span> <span class="keyword">extends</span> <span class="title">JSProcessor</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> MaterialDialog materialDialog = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DialogProcessor</span><span class="params">(Context context, JSInvoker jsInvoker, String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, jsInvoker, name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Subscribe</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processNormalDialogEvent</span><span class="params">(<span class="keyword">final</span> NormalDialogEvent event)</span> </span>&#123;</span><br><span class="line">        NormalDialogEvent.Request data = event.getRequest();</span><br><span class="line">        hideDialog();</span><br><span class="line">        materialDialog = <span class="keyword">new</span> MaterialDialog.Builder(getContext())</span><br><span class="line">                .title(data.getTitle())</span><br><span class="line">                .content(data.getContent())</span><br><span class="line">                .positiveText(data.getPositiveText())</span><br><span class="line">                .negativeText(data.getNegativeText())</span><br><span class="line">                .onPositive(<span class="keyword">new</span> MaterialDialog.SingleButtonCallback() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(@NonNull MaterialDialog dialog, @NonNull DialogAction which)</span> </span>&#123;</span><br><span class="line">                        LogTool.debug(<span class="string">"onPositive"</span>);</span><br><span class="line">                        NormalDialogEvent.Response result = <span class="keyword">new</span> NormalDialogEvent.Response();</span><br><span class="line">                        result.setMessage(<span class="string">"sure"</span>);</span><br><span class="line">                        result.setResult(<span class="number">1</span>);</span><br><span class="line">                        getJsInvoker().onJsInvoke(event.getCallback(JsonTool.toJsonString(result)));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                .onNegative(<span class="keyword">new</span> MaterialDialog.SingleButtonCallback() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(@NonNull MaterialDialog dialog, @NonNull DialogAction which)</span> </span>&#123;</span><br><span class="line">                        LogTool.debug(<span class="string">"onNegative"</span>);</span><br><span class="line">                        NormalDialogEvent.Response result = <span class="keyword">new</span> NormalDialogEvent.Response();</span><br><span class="line">                        result.setMessage(<span class="string">"cancel"</span>);</span><br><span class="line">                        result.setResult(<span class="number">0</span>);</span><br><span class="line">                        getJsInvoker().onJsInvoke(event.getCallback(JsonTool.toJsonString(result)));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                .build();</span><br><span class="line">        materialDialog.show();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">hideDialog</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (materialDialog != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (materialDialog.isShowing()) &#123;</span><br><span class="line">                materialDialog.dismiss();</span><br><span class="line">            &#125;</span><br><span class="line">            materialDialog = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>AndroidJSSDKCore中同时定义注解Processor和基类JSProcessor。目前通过匹配注解Module和注解Processor的属性name来功能对接，所以DialogModule和DialogProcessor的name都为Dialog。</p>
+<h4 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h4><p>默认的命名空间为<code>com.farseer</code>,当然也可以通过JSSDK完成自定义命名空间。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JSSDK.init(<span class="keyword">this</span>, BuildConfig.APPLICATION_ID, <span class="string">"ITOMIX"</span>, <span class="string">"com.farseer.jssdk"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>其中参数<code>ITOMIX</code>为自定义的命名空间。</p>
+<h4 id="前端使用"><a href="#前端使用" class="headerlink" title="前端使用"></a>前端使用</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"ITOMIX.Dialog.normalDialog(JSON.stringify(&#123;'title': 'title','content': 'content','positiveText': 'Sure','negativeText': 'Cancel'&#125;), function(params)&#123;ITOMIX.Common.toast(JSON.stringify(&#123;'content':JSON.stringify(params)&#125;), function()&#123;&#125;);&#125;);"</span>&gt;</span>测试<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>了解通信协议后，前端开发同学可以很轻松的完成开发任务。</p>
+<h4 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h4><p><img src="/img/android_jssdk_mind_02.gif" alt="Common Module"><img src="/img/android_jssdk_mind_03.gif" alt="Dialog Module"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>再多的总结不如去阅读开源项目，去尝试自己实践的模块开发。</p>
+<ul>
+<li><a href="https://github.com/iFarSeer/AndroidJSSDKCore">AndroidJSSDKCore</a>;</li>
+<li><a href="https://github.com/iFarSeer/AndroidJSSDKCommon">AndroidJSSDKCommon</a>;</li>
+<li><a href="https://github.com/iFarSeer/AndroidJSSDKDialog">AndroidJSSDKDialog</a>;</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/18/android_scan_annotation/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android扫描注解</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="android-jssdk-mind" data-title="Android与WebView交互新解" data-url="https://github.com/iFarSeer/2016/07/11/android-jssdk-mind/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cczscq"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 赵淑超
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
