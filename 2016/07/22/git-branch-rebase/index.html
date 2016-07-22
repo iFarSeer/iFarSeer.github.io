@@ -29,7 +29,15 @@ dev_share_">
 <meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeSummery.png">
 <meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeIMLog.png">
 <meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeShareLog.png">
-<meta property="og:updated_time" content="2016-07-22T03:14:39.000Z">
+<meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeRebase_01.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeRebase_02.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeRebase_03.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeRebase_04.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeRebase_06.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPractice1.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeRebase_05.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeRebase_06.png">
+<meta property="og:updated_time" content="2016-07-22T10:06:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git合并分支实践">
 <meta name="twitter:description" content="Git分支合并是我们绕不过的坑，尤其是在多Topic分支同步开发中。今天让我们来看看怎么样，更安全，更高效的完成Git分支的合并工作。
@@ -244,10 +252,22 @@ dev_share_">
 <li>dev_im_bak:作为dev_im分支的备份，以便演示；</li>
 </ul>
 <p>大家主要关注master,dev_im和dev_share分支，先看看分支关系图。<br><img src="/img/GitBranchPracticeSummery.png" alt="分支关系图"></p>
-<p>dev_im分支提交记录如下：<br><img src="/img/GitBranchPracticeIMLog.png" alt="分支关系图"></p>
-<p>dev_share分支提交如下：<br><img src="/img/GitBranchPracticeShareLog.png" alt="分支关系图"></p>
-<p>准备开始合并dev_im和dev_share分支。</p>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<p>dev_im分支提交记录如下：<br><img src="/img/GitBranchPracticeIMLog.png" alt="dev_im分支提交记录"></p>
+<p>dev_share分支提交记录如下：<br><img src="/img/GitBranchPracticeShareLog.png" alt="dev_share分支提交记录"></p>
+<p>在dev_im和dev_share的修改记录中，同时修改common.txt文件，以创造合并冲突。</p>
+<p>合并的目标是<strong><em>把分支dev_im的提交记录合并到分支dev_share上</em></strong>。</p>
+<p>好的，现在准备开始合并dev_im和dev_share分支。</p>
+<h3 id="尝试合并"><a href="#尝试合并" class="headerlink" title="尝试合并"></a>尝试合并</h3><p>Git支持merge和rebase两种方式合并代码，两个方式各有利弊。今天我们的合并功能使用rebase方式完成，如果对rebase了解不是很深入，请详细阅读下<strong>参考文章</strong>中的文章。</p>
+<h4 id="第一步：rebase"><a href="#第一步：rebase" class="headerlink" title="第一步：rebase"></a>第一步：rebase</h4><p>切换到分支dev_share下，执行<code>git rebase dev_im</code>命名。<br><img src="/img/GitBranchPracticeRebase_01.png" alt="git rebase dev_im"><br>和我们预想的一样，在rebase过程中发生了冲突。</p>
+<h4 id="第二步：解决合并冲突"><a href="#第二步：解决合并冲突" class="headerlink" title="第二步：解决合并冲突"></a>第二步：解决合并冲突</h4><p>rebase合并过程中，先后会产生两次冲突，具体冲突入下图：<br><img src="/img/GitBranchPracticeRebase_02.png" alt="冲突细节1"><br><img src="/img/GitBranchPracticeRebase_03.png" alt="冲突细节2"></p>
+<p>以上两个冲突解决起来比较简单，最终合并好的common.txt内容如下：<br><img src="/img/GitBranchPracticeRebase_04.png" alt="合并结果"></p>
+<p>本地分支dev_im合并到本地分支dev_share后，dev_share的提交记录如下图：<br><img src="/img/GitBranchPracticeRebase_06.png" alt="合并后dev_share提交记录"><br>在此图中，完美的解释了rebase的工作原理。找到dev_im与dev_share的Parent节点，把dev_share的每个提交在dev_im上重衍。<strong>大家要注意dev_share的提交记录，在rebase前后的commit id 是不一致的</strong>。</p>
+<p>这里推荐一个一个Git命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge-base commit1 commit2</span><br></pre></td></tr></table></figure></p>
+<p>使用此命令可以找到commit1与commit2的Parent节点。</p>
+<h4 id="第三步：远端分支同步"><a href="#第三步：远端分支同步" class="headerlink" title="第三步：远端分支同步"></a>第三步：远端分支同步</h4><p>完成本地分支合并后，本地分支与远端分支的情况如下：<br><img src="/img/GitBranchPractice1.png" alt="分支现状"></p>
+<p>本地分支dev_share状态如下：<br><img src="/img/GitBranchPracticeRebase_05.png" alt="当前状态"><br>当完成本地分支dev_im合并到本地分支dev_share后，发现与远端分支dev_share产生分歧，提示<code>git pull</code>完成同步。<br>使用<code>git pull -rebase</code>与远端分支完成同步。<br><img src="/img/GitBranchPracticeRebase_06.png" alt="git pull --rebase"><br>看到这个冲突，已经内牛满面，这个冲突命名之前已经解决过，现在为什么有出现啦？一个冲突解决两次这个不是我们所期望的。</p>
+<p>在<strong>第二步：解决合并冲突</strong>中，大家已经注意到rebase后，本地分支dev_share之前的提交记录commit id已经发生了变化。本地分支dev_share和origin/dev_share 的Parent节点为分支master的最后一次提交，所以在<code>git pull -rebase</code>时，会把dev_share的六个提交记录在origin/dev_share上重衍，所以会再次出现冲突。</p>
+<h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
 <li><a href="http://blog.jobbole.com/25877/" target="_blank" rel="external">Git详解之三：Git分支</a></li>
 <li><a href="http://backlogtool.com/git-guide/cn/stepup/stepup1_1.html" target="_blank" rel="external">猴子都能懂的GIT入门</a></li>
 </ul>
