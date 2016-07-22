@@ -4,24 +4,43 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>今天，我拯救了一个行业 | 赵淑超</title>
+  <title>Git合并分支实践 | 赵淑超</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="不夸张的说，我今天拯救了一个传统行业。好NB的赶脚~~~
-现在这个时代，很多传统行业都在向移动互联网进军，希望跟的上时代，获得更好的发展，或者守住目前的阵地。但是，传统行业技术不过关，或者他们根本不想深入技术，所以他们会找一些技术公司采取合作的方式开发移动时代的产品。
-D创业型公司，传统行业合作的很深入，很有成效，我之前在D公司两年，带领公司内最重要的D项目Android团队负责与传统行业相关的项">
+  <meta name="description" content="Git分支合并是我们绕不过的坑，尤其是在多Topic分支同步开发中。今天让我们来看看怎么样，更安全，更高效的完成Git分支的合并工作。
+准备工作我预先在GitHub上创建一个仓库GitBranchPractice。
+分支说明：
+
+master：主分支，外发release分支；
+dev_share：开发分享功能的Topic分支；
+dev_im：开发即时聊天功能的Topic分支；
+dev_share_">
 <meta property="og:type" content="article">
-<meta property="og:title" content="今天，我拯救了一个行业">
-<meta property="og:url" content="https://github.com/iFarSeer/2016/04/11/今天，我拯救了一个行业/index.html">
+<meta property="og:title" content="Git合并分支实践">
+<meta property="og:url" content="https://github.com/iFarSeer/2016/07/22/git-branch-rebase/index.html">
 <meta property="og:site_name" content="赵淑超">
-<meta property="og:description" content="不夸张的说，我今天拯救了一个传统行业。好NB的赶脚~~~
-现在这个时代，很多传统行业都在向移动互联网进军，希望跟的上时代，获得更好的发展，或者守住目前的阵地。但是，传统行业技术不过关，或者他们根本不想深入技术，所以他们会找一些技术公司采取合作的方式开发移动时代的产品。
-D创业型公司，传统行业合作的很深入，很有成效，我之前在D公司两年，带领公司内最重要的D项目Android团队负责与传统行业相关的项">
-<meta property="og:updated_time" content="2016-04-12T13:56:55.000Z">
+<meta property="og:description" content="Git分支合并是我们绕不过的坑，尤其是在多Topic分支同步开发中。今天让我们来看看怎么样，更安全，更高效的完成Git分支的合并工作。
+准备工作我预先在GitHub上创建一个仓库GitBranchPractice。
+分支说明：
+
+master：主分支，外发release分支；
+dev_share：开发分享功能的Topic分支；
+dev_im：开发即时聊天功能的Topic分支；
+dev_share_">
+<meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeSummery.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeIMLog.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeShareLog.png">
+<meta property="og:updated_time" content="2016-07-22T03:14:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="今天，我拯救了一个行业">
-<meta name="twitter:description" content="不夸张的说，我今天拯救了一个传统行业。好NB的赶脚~~~
-现在这个时代，很多传统行业都在向移动互联网进军，希望跟的上时代，获得更好的发展，或者守住目前的阵地。但是，传统行业技术不过关，或者他们根本不想深入技术，所以他们会找一些技术公司采取合作的方式开发移动时代的产品。
-D创业型公司，传统行业合作的很深入，很有成效，我之前在D公司两年，带领公司内最重要的D项目Android团队负责与传统行业相关的项">
+<meta name="twitter:title" content="Git合并分支实践">
+<meta name="twitter:description" content="Git分支合并是我们绕不过的坑，尤其是在多Topic分支同步开发中。今天让我们来看看怎么样，更安全，更高效的完成Git分支的合并工作。
+准备工作我预先在GitHub上创建一个仓库GitBranchPractice。
+分支说明：
+
+master：主分支，外发release分支；
+dev_share：开发分享功能的Topic分支；
+dev_im：开发即时聊天功能的Topic分支；
+dev_share_">
+<meta name="twitter:image" content="https://github.com/iFarSeer/img/GitBranchPracticeSummery.png">
   
     <link rel="alternative" href="/atom.xml" title="赵淑超" type="application/atom+xml">
   
@@ -174,11 +193,11 @@ D创业型公司，传统行业合作的很深入，很有成效，我之前在D
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-今天，我拯救了一个行业" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-git-branch-rebase" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/11/今天，我拯救了一个行业/" class="article-date">
-  	<time datetime="2016-04-11T13:20:29.000Z" itemprop="datePublished">2016-04-11</time>
+      <a href="/2016/07/22/git-branch-rebase/" class="article-date">
+  	<time datetime="2016-07-22T00:50:33.000Z" itemprop="datePublished">2016-07-22</time>
 </a>
     </div>
   
@@ -191,7 +210,7 @@ D创业型公司，传统行业合作的很深入，很有成效，我之前在D
         
   
     <h1 class="article-title" itemprop="name">
-      今天，我拯救了一个行业
+      Git合并分支实践
     </h1>
   
 
@@ -199,11 +218,11 @@ D创业型公司，传统行业合作的很深入，很有成效，我之前在D
       
       <div class="article-info article-info-post">
         
-        
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/职场/">职场</a>
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
 	</div>
 
+        
 
         <div class="clearfix"></div>
       </div>
@@ -214,17 +233,24 @@ D创业型公司，传统行业合作的很深入，很有成效，我之前在D
       
         
         
-          <p>不夸张的说，我今天拯救了一个传统行业。好NB的赶脚~~~</p>
-<p>现在这个时代，很多传统行业都在向移动互联网进军，希望跟的上时代，获得更好的发展，或者守住目前的阵地。但是，传统行业技术不过关，或者他们根本不想深入技术，所以他们会找一些技术公司采取合作的方式开发移动时代的产品。</p>
-<p><code>D</code>创业型公司，传统行业合作的很深入，很有成效，我之前在<code>D</code>公司两年，带领公司内最重要的D项目Android团队负责与传统行业相关的项目。传统行业提供<code>高质量内容</code>，D公司把<code>高质量内容</code>包装成高质量的移动产品，面向个体用户，机构组织销售。</p>
-<p>当时我们团队花大量时间设计和实现了很多<code>加密保护措施</code>，以保证<code>高质量内容</code>的安全性，在这里不便细说。</p>
-<p>有一次，在国外的一个论坛上，看到一个帖子，把我们的高质量数据破解啦！当时好伤心，静下心来，继续以破解者的思路，思考还有哪些安全隐患。又一次把更强大的<code>加密保护措施</code>，付诸实现。</p>
-<p>大半年前，由于个人发展问题，我选择离开<code>D</code>公司，离开一起奋战两年多的伙伴，内心特别不舍。在工作交接中，我几乎采取加红加粗的方式突出对<br><code>加密保护措施</code>相关的业务。</p>
-<p>昨天晚上，我突然想看看曾经奋斗两年的伙伴的成果。打开<code>D</code>公司的网站，随意下载了产品，安装后点了点。之后，反解产品，看看有没有引入新的技术。结果，我大吃一惊。特别重要的资源文件（包括脚本）完全是明文！其中一个资源文件中还存在一个内部测试使用的<code>无需权限验证</code>的数据接口！！！我简单测试了下，接口完全可用，脚本轻松可以在本地Run起来。orz！！！</p>
-<p>第一时间，微信<code>D</code>公司CEO（技术出身），把具体问题说清楚，同时提出几点建议，以避免类似事情的发生。CEO了解情况后，意识到事故的严重性，简单一句“改天聊，我先看看”结束了我们的对话。哈哈，他就是个<code>直肠</code>人，和他熟悉的人大家都知道。</p>
-<p>要知道这些<code>高质量内容</code>是传统行业的瑰宝，是传统行业赖以生存的生命线。一旦<code>高质量内容</code>被知识产权意识不强的人扩散，对于传统行业的损失是多么的巨大。</p>
-<p>所以说，我今天拯救了一个行业！！！哈哈~~</p>
-<p>其实，无论公司还是个人，<code>知识产权意识</code>需要加强，加强对<code>知识产权</code>的保护，加强对<code>知识产权</code>的尊重。</p>
+          <p>Git分支合并是我们绕不过的坑，尤其是在多Topic分支同步开发中。今天让我们来看看怎么样，更安全，更高效的完成Git分支的合并工作。</p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>我预先在GitHub上创建一个仓库<a href="https://github.com/iFarSeer/GitBranchPractice">GitBranchPractice</a>。</p>
+<p>分支说明：</p>
+<ul>
+<li>master：主分支，外发release分支；</li>
+<li>dev_share：开发分享功能的Topic分支；</li>
+<li>dev_im：开发即时聊天功能的Topic分支；</li>
+<li>dev_share_bak:作为dev_share分支的备份，以便演示；</li>
+<li>dev_im_bak:作为dev_im分支的备份，以便演示；</li>
+</ul>
+<p>大家主要关注master,dev_im和dev_share分支，先看看分支关系图。<br><img src="/img/GitBranchPracticeSummery.png" alt="分支关系图"></p>
+<p>dev_im分支提交记录如下：<br><img src="/img/GitBranchPracticeIMLog.png" alt="分支关系图"></p>
+<p>dev_share分支提交如下：<br><img src="/img/GitBranchPracticeShareLog.png" alt="分支关系图"></p>
+<p>准备开始合并dev_im和dev_share分支。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a href="http://blog.jobbole.com/25877/" target="_blank" rel="external">Git详解之三：Git分支</a></li>
+<li><a href="http://backlogtool.com/git-guide/cn/stepup/stepup1_1.html" target="_blank" rel="external">猴子都能懂的GIT入门</a></li>
+</ul>
 
         
       
@@ -236,18 +262,9 @@ D创业型公司，传统行业合作的很深入，很有成效，我之前在D
     
 <nav id="article-nav">
   
-    <a href="/2016/04/12/回顾设计模式之工厂模式3_抽象工厂/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          回顾设计模式之工厂模式3_抽象工厂
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/10/java执行linux命令和shell脚本/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">java执行linux命令和shell脚本</div>
+    <a href="/2016/07/11/android-jssdk-mind/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android与WebView交互新解</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -282,7 +299,7 @@ D创业型公司，传统行业合作的很深入，很有成效，我之前在D
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="今天，我拯救了一个行业" data-title="今天，我拯救了一个行业" data-url="https://github.com/iFarSeer/2016/04/11/今天，我拯救了一个行业/"></div>
+	<div class="ds-thread" data-thread-key="git-branch-rebase" data-title="Git合并分支实践" data-url="https://github.com/iFarSeer/2016/07/22/git-branch-rebase/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
