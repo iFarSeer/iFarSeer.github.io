@@ -6,26 +6,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>Git合并分支实践 | 赵淑超</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Git分支合并是我们绕不过的坑，尤其是在多Topic分支同步开发中。今天让我们来看看怎么样，更安全，更高效的完成Git分支的合并工作。
+  <meta name="description" content="Git分支合并是我们绕不过的坑，尤其是在多Topic分支同步开发中。作为Git仓库的Owner怎么样，更安全，更高效的完成Git分支的合并工作。
 准备工作我预先在GitHub上创建一个仓库GitBranchPractice。
 分支说明：
 
 master：主分支，外发release分支；
 dev_share：开发分享功能的Topic分支；
 dev_im：开发即时聊天功能的Topic分支；
-dev_share_">
+dev_s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git合并分支实践">
 <meta property="og:url" content="https://github.com/iFarSeer/2016/07/22/git-branch-rebase/index.html">
 <meta property="og:site_name" content="赵淑超">
-<meta property="og:description" content="Git分支合并是我们绕不过的坑，尤其是在多Topic分支同步开发中。今天让我们来看看怎么样，更安全，更高效的完成Git分支的合并工作。
+<meta property="og:description" content="Git分支合并是我们绕不过的坑，尤其是在多Topic分支同步开发中。作为Git仓库的Owner怎么样，更安全，更高效的完成Git分支的合并工作。
 准备工作我预先在GitHub上创建一个仓库GitBranchPractice。
 分支说明：
 
 master：主分支，外发release分支；
 dev_share：开发分享功能的Topic分支；
 dev_im：开发即时聊天功能的Topic分支；
-dev_share_">
+dev_s">
 <meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeSummery.png">
 <meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeIMLog.png">
 <meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeShareLog.png">
@@ -35,19 +35,22 @@ dev_share_">
 <meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeRebase_04.png">
 <meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeRebase_06.png">
 <meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPractice1.png">
-<meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeRebase_05.png">
 <meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeRebase_06.png">
-<meta property="og:updated_time" content="2016-07-22T10:06:01.000Z">
+<meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeRebase_05.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeBest_01.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeBest_02.png">
+<meta property="og:image" content="https://github.com/iFarSeer/img/GitBranchPracticeBest_03.png">
+<meta property="og:updated_time" content="2016-07-23T02:44:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git合并分支实践">
-<meta name="twitter:description" content="Git分支合并是我们绕不过的坑，尤其是在多Topic分支同步开发中。今天让我们来看看怎么样，更安全，更高效的完成Git分支的合并工作。
+<meta name="twitter:description" content="Git分支合并是我们绕不过的坑，尤其是在多Topic分支同步开发中。作为Git仓库的Owner怎么样，更安全，更高效的完成Git分支的合并工作。
 准备工作我预先在GitHub上创建一个仓库GitBranchPractice。
 分支说明：
 
 master：主分支，外发release分支；
 dev_share：开发分享功能的Topic分支；
 dev_im：开发即时聊天功能的Topic分支；
-dev_share_">
+dev_s">
 <meta name="twitter:image" content="https://github.com/iFarSeer/img/GitBranchPracticeSummery.png">
   
     <link rel="alternative" href="/atom.xml" title="赵淑超" type="application/atom+xml">
@@ -241,7 +244,7 @@ dev_share_">
       
         
         
-          <p>Git分支合并是我们绕不过的坑，尤其是在多Topic分支同步开发中。今天让我们来看看怎么样，更安全，更高效的完成Git分支的合并工作。</p>
+          <p>Git分支合并是我们绕不过的坑，尤其是在多Topic分支同步开发中。作为Git仓库的Owner怎么样，更安全，更高效的完成Git分支的合并工作。</p>
 <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>我预先在GitHub上创建一个仓库<a href="https://github.com/iFarSeer/GitBranchPractice">GitBranchPractice</a>。</p>
 <p>分支说明：</p>
 <ul>
@@ -265,9 +268,22 @@ dev_share_">
 <p>这里推荐一个一个Git命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge-base commit1 commit2</span><br></pre></td></tr></table></figure></p>
 <p>使用此命令可以找到commit1与commit2的Parent节点。</p>
 <h4 id="第三步：远端分支同步"><a href="#第三步：远端分支同步" class="headerlink" title="第三步：远端分支同步"></a>第三步：远端分支同步</h4><p>完成本地分支合并后，本地分支与远端分支的情况如下：<br><img src="/img/GitBranchPractice1.png" alt="分支现状"></p>
-<p>本地分支dev_share状态如下：<br><img src="/img/GitBranchPracticeRebase_05.png" alt="当前状态"><br>当完成本地分支dev_im合并到本地分支dev_share后，发现与远端分支dev_share产生分歧，提示<code>git pull</code>完成同步。<br>使用<code>git pull -rebase</code>与远端分支完成同步。<br><img src="/img/GitBranchPracticeRebase_06.png" alt="git pull --rebase"><br>看到这个冲突，已经内牛满面，这个冲突命名之前已经解决过，现在为什么有出现啦？一个冲突解决两次这个不是我们所期望的。</p>
-<p>在<strong>第二步：解决合并冲突</strong>中，大家已经注意到rebase后，本地分支dev_share之前的提交记录commit id已经发生了变化。本地分支dev_share和origin/dev_share 的Parent节点为分支master的最后一次提交，所以在<code>git pull -rebase</code>时，会把dev_share的六个提交记录在origin/dev_share上重衍，所以会再次出现冲突。</p>
-<h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
+<p>本地分支dev_share提交记录如下：<br><img src="/img/GitBranchPracticeRebase_06.png" alt="git pull --rebase"><br>本地分支dev_share状态如下：<br><img src="/img/GitBranchPracticeRebase_05.png" alt="当前状态"><br>当完成本地分支dev_im合并到本地分支dev_share后，发现与远端分支dev_share产生分歧，提示<code>git pull</code>完成同步。<br>使用<code>git pull -rebase</code>与远端分支完成同步。</p>
+<p>看到这个冲突，已经内牛满面，这个冲突命名之前已经解决过，现在为什么有出现啦？一个冲突解决两次这个不是我们所期望的。</p>
+<p>大家已经注意到rebase后，本地分支dev_share之前的提交记录commit id已经发生了变化。本地分支dev_share和origin/dev_share 的Parent节点为分支master的最后一次提交，所以在<code>git pull -rebase</code>时，会把dev_share的六个提交记录在origin/dev_share上重衍，所以会再次出现冲突。</p>
+<h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><p>在<strong>尝试合并</strong>中第三步<strong>远端分支同步</strong>后，会发生再次重衍。如果在合并dev_im和dev_merge时，发生冲突（有些冲突，开发中无法避免），那么如果绕过再次重衍的过程，就可以避免两次解决冲突的尴尬。</p>
+<h4 id="第一步：创建本地Merge分支"><a href="#第一步：创建本地Merge分支" class="headerlink" title="第一步：创建本地Merge分支"></a>第一步：创建本地Merge分支</h4><p>找到本地分支dev_im和dev_share的Parent节点，创建本地分支dev_merge，<strong>dev_merge的作用是dev_share的替代者</strong>。<br>在演示实例中，Parent节点恰好是master分支，当然我们可以通过<code>git merge-base dev_im dev_share</code>找到Parent节点。</p>
+<p><img src="/img/GitBranchPracticeBest_01.png" alt="确定Parent节点，创建dev_merge分支"><br>确定Parent节点为<code>cbe416b36a6351c457b0e6bd5f965b037dd2780c</code>,通过Parent节点创建本地分支dev_merge。<br><img src="/img/GitBranchPracticeBest_02.png" alt="确认dev_merge分支"><br>确认dev_merge的最后一个commit id为<code>cbe416b36a6351c457b0e6bd5f965b037dd2780c</code>。</p>
+<h4 id="第二步：合并分支"><a href="#第二步：合并分支" class="headerlink" title="第二步：合并分支"></a>第二步：合并分支</h4><p>目标是把dev_im与dev_share的提交合并到dev_merge中。<br>在<code>git rebase dev_share</code>和<code>git rebase dev_im</code>后，dev_merge的提交记录如下：<br><img src="/img/GitBranchPracticeBest_03.png" alt="dev_merge的提交记录"><br>在dev_merge分支上，可以看到从dev_im上合并的commit id未发生变化，从dev_share上合并的commit id同<strong>尝试合并</strong>一样，发生了变化。</p>
+<h4 id="第三步：同步到远端"><a href="#第三步：同步到远端" class="headerlink" title="第三步：同步到远端"></a>第三步：同步到远端</h4><p>在<strong>第一步：创建本地Merge分支</strong>中，已经提前指出<strong>dev_merge的作用是dev_share的替代者</strong>。在完成本地合并后，我们需要及时的同步到远端，以便其他小伙伴继续coding起来。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin dev_share</span><br></pre></td></tr></table></figure></p>
+<p>把本地的dev_merge推送到origin/dev_share分支，其他小伙伴只需在dev_share分支上<code>git pull --rebase</code>便可以继续开发工作。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在这里再次提醒下，我们合并的目标是<strong><em>把分支dev_im的提交记录合并到分支dev_share上</em></strong>。完成合并后，需要保证:</p>
+<ul>
+<li>dev_im的后续提交可以轻松的再次合并到dev_share中;</li>
+<li>dev_share的远端库可以轻松同步到其他小伙伴。</li>
+</ul>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>按照<strong>最佳实践</strong>的方式，需要Owner与小伙伴及时沟通，保证小伙伴们在合并过程中不要把本地dev_share的的提交同步到远端，以避免在<strong>第三步：同步到远端</strong>时，丢失小伙伴的提交记录。</p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
 <li><a href="http://blog.jobbole.com/25877/" target="_blank" rel="external">Git详解之三：Git分支</a></li>
 <li><a href="http://backlogtool.com/git-guide/cn/stepup/stepup1_1.html" target="_blank" rel="external">猴子都能懂的GIT入门</a></li>
 </ul>
