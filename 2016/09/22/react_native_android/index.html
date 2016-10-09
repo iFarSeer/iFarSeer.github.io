@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>React Native Android 图片资源问题 | 赵淑超</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="React Native作为facebook的大作，一直收到开发者的喜爱。facebook最初设想React Native独立 完成应用，但是我们开发者更多开发在已有应用基础上，引入React Native帮助我们完成部分功能的开发。接下来我来描述下我在引入React Native后，遇到的有关图片资源管理问题。
+React Native Bundle 打包通过以下命令打包：1react-na">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Native Android 图片资源问题">
+<meta property="og:url" content="https://github.com/iFarSeer/2016/09/22/react_native_android/index.html">
+<meta property="og:site_name" content="赵淑超">
+<meta property="og:description" content="React Native作为facebook的大作，一直收到开发者的喜爱。facebook最初设想React Native独立 完成应用，但是我们开发者更多开发在已有应用基础上，引入React Native帮助我们完成部分功能的开发。接下来我来描述下我在引入React Native后，遇到的有关图片资源管理问题。
+React Native Bundle 打包通过以下命令打包：1react-na">
+<meta property="og:image" content="https://github.com/iFarSeer/img/react_native_android_01.png">
+<meta property="og:updated_time" content="2016-10-09T02:27:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React Native Android 图片资源问题">
+<meta name="twitter:description" content="React Native作为facebook的大作，一直收到开发者的喜爱。facebook最初设想React Native独立 完成应用，但是我们开发者更多开发在已有应用基础上，引入React Native帮助我们完成部分功能的开发。接下来我来描述下我在引入React Native后，遇到的有关图片资源管理问题。
+React Native Bundle 打包通过以下命令打包：1react-na">
+<meta name="twitter:image" content="https://github.com/iFarSeer/img/react_native_android_01.png">
+  
+    <link rel="alternative" href="/atom.xml" title="赵淑超" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/zhaosc.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/zhaosc.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">赵淑超</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/iFarSeer" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="mailto:farseer.spade@gmail.com" title="mail">mail</a>
+					        
+								<a class="google" target="_blank" href="https://plus.google.com/117233387937781187519" title="google">google</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Android/" style="font-size: 12.5px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 20px;">Android Studio</a> <a href="/tags/AndroidJSSDKCore/" style="font-size: 10px;">AndroidJSSDKCore</a> <a href="/tags/Dagger2/" style="font-size: 12.5px;">Dagger2</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/React-Native/" style="font-size: 10px;">React Native</a> <a href="/tags/gradle/" style="font-size: 17.5px;">gradle</a> <a href="/tags/realm/" style="font-size: 12.5px;">realm</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/体育/" style="font-size: 10px;">体育</a> <a href="/tags/依赖注入/" style="font-size: 12.5px;">依赖注入</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">一个程序员，安静，专注，认真... 其实，基情，213才是真正的我~</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">赵淑超</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/zhaosc.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">赵淑超</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/iFarSeer" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:farseer.spade@gmail.com" title="mail">mail</a>
+			        
+						<a class="google" target="_blank" href="https://plus.google.com/117233387937781187519" title="google">google</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-react_native_android" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/22/react_native_android/" class="article-date">
+  	<time datetime="2016-09-22T00:50:33.000Z" itemprop="datePublished">2016-09-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React Native Android 图片资源问题
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        
+          <p>React Native作为facebook的大作，一直收到开发者的喜爱。facebook最初设想React Native独立 完成应用，但是我们开发者更多开发在已有应用基础上，引入React Native帮助我们完成部分功能的开发。<br><br>接下来我来描述下我在引入React Native后，遇到的有关图片资源管理问题。</p>
+<h3 id="React-Native-Bundle-打包"><a href="#React-Native-Bundle-打包" class="headerlink" title="React Native Bundle 打包"></a>React Native Bundle 打包</h3><p>通过以下命令打包：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native bundle --entry-file index.android.js --platform android --dev false --bundle-output build/index.bundle --assets-dest build</span><br></pre></td></tr></table></figure></p>
+<p>输出为：<br><img src="/img/react_native_android_01.png" alt=""></p>
+<p>React Native在bundle后，会为开发者把资源整理到不同的drawable下。</p>
+<h3 id="使用Bundle和图片资源"><a href="#使用Bundle和图片资源" class="headerlink" title="使用Bundle和图片资源"></a>使用Bundle和图片资源</h3><p>React Native支持两种使用bundle和图片资源的方式。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> ReactNativeHost mReactNativeHost </span><br><span class="line">	= <span class="keyword">new</span> ReactNativeHost(<span class="keyword">this</span>) &#123;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> List&lt;ReactPackage&gt; <span class="title">getPackages</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> Arrays.&lt;ReactPackage&gt;asList(</span><br><span class="line">         <span class="keyword">new</span> MainReactPackage()</span><br><span class="line">     );</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Nullable</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> String <span class="title">getBundleAssetName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="string">"****"</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Nullable</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> String <span class="title">getJSBundleFile</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="string">"****"</span>;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>getJSBundleFile指定内存和存储设备bundle的filePath；<br>getBundleAssetName指定assets中bundle的filePath;<br>其中优先使用getJSBundleFile。</p>
+<p>可以看到我们只为React Native指定bundle文件路径，并没有指定资源路径。那么React Native 如何使用图片资源呢？</p>
+<h4 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h4><p>分析图片资源访问问题，我们先找到node_modules/react-native/Libraries/Image/image.android.js。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> source = resolveAssetSource(<span class="keyword">this</span>.props.source);</span><br><span class="line">    <span class="keyword">const</span> loadingIndicatorSource = resolveAssetSource(<span class="keyword">this</span>.props.loadingIndicatorSource);</span><br><span class="line"></span><br><span class="line">  	...</span><br><span class="line">  	</span><br><span class="line">    if (source &amp;&amp; (source.uri || <span class="built_in">Array</span>.isArray(source))) &#123;</span><br><span class="line">      <span class="keyword">let</span> style;</span><br><span class="line">      <span class="keyword">let</span> sources;</span><br><span class="line">      <span class="keyword">if</span> (source.uri) &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;width, height&#125; = source;</span><br><span class="line">        style = flattenStyle([&#123;width, height&#125;, styles.base, <span class="keyword">this</span>.props.style]);</span><br><span class="line">        sources = [&#123;uri: source.uri&#125;];</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        style = flattenStyle([styles.base, <span class="keyword">this</span>.props.style]);</span><br><span class="line">        sources = source;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> &#123;onLoadStart, onLoad, onLoadEnd&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">      <span class="keyword">const</span> nativeProps = merge(<span class="keyword">this</span>.props, &#123;</span><br><span class="line">        style,</span><br><span class="line">        shouldNotifyLoadEvents: !!(onLoadStart || onLoad || onLoadEnd),</span><br><span class="line">        src: sources,</span><br><span class="line">        loadingIndicatorSrc: loadingIndicatorSource ? loadingIndicatorSource.uri : <span class="literal">null</span>,</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">	...</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>可以看到render中通过resolveAssetSource对是source进行了处理。</p>
+<p>继续去resolveAssetSource看看：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getBundleSourcePath</span>(<span class="params"></span>): ?<span class="title">string</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (_bundleSourcePath === <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> scriptURL = SourceCode.scriptURL;</span><br><span class="line">    <span class="keyword">if</span> (!scriptURL) &#123;</span><br><span class="line">      <span class="comment">// scriptURL is falsy, we have nothing to go on here</span></span><br><span class="line">      _bundleSourcePath = <span class="literal">null</span>;</span><br><span class="line">      <span class="keyword">return</span> _bundleSourcePath;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (scriptURL.startsWith(<span class="string">'assets://'</span>)) &#123;</span><br><span class="line">      <span class="comment">// running from within assets, no offline path to use</span></span><br><span class="line">      _bundleSourcePath = <span class="literal">null</span>;</span><br><span class="line">      <span class="keyword">return</span> _bundleSourcePath;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (scriptURL.startsWith(<span class="string">'file://'</span>)) &#123;</span><br><span class="line">      <span class="comment">// cut off the protocol</span></span><br><span class="line">      _bundleSourcePath = scriptURL.substring(<span class="number">7</span>, scriptURL.lastIndexOf(<span class="string">'/'</span>) + <span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      _bundleSourcePath = scriptURL.substring(<span class="number">0</span>, scriptURL.lastIndexOf(<span class="string">'/'</span>) + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> _bundleSourcePath;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setCustomSourceTransformer</span>(<span class="params"></span><br><span class="line">  transformer: (resolver: AssetSourceResolver</span>) =&gt; <span class="title">ResolvedAssetSource</span>,</span><br><span class="line">): <span class="title">void</span> </span>&#123;</span><br><span class="line">  _customSourceTransformer = transformer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resolveAssetSource</span>(<span class="params">source: any</span>): ?<span class="title">ResolvedAssetSource</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> source === <span class="string">'object'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> source;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> asset = AssetRegistry.getAssetByID(source);</span><br><span class="line">  <span class="keyword">if</span> (!asset) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> resolver = <span class="keyword">new</span> AssetSourceResolver(getDevServerURL(), getBundleSourcePath(), asset);</span><br><span class="line">  <span class="keyword">if</span> (_customSourceTransformer) &#123;</span><br><span class="line">    <span class="keyword">return</span> _customSourceTransformer(resolver);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> resolver.defaultAsset();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>构造方法中创建了AssetSourceResolver，默认通过defaultAsset对asset进行处理，注意到：在构建AssetSourceResolver时，第二个参数getBundleSourcePath()中通过assets://和file://对bundle路径进行了区分处理,assets://是返回null。</p>
+<p>继续去AssetSourceResolver中看看：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  isLoadedFromFileSystem(): boolean &#123;</span><br><span class="line">    <span class="keyword">return</span> !!<span class="keyword">this</span>.bundlePath;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">defaultAsset(): ResolvedAssetSource &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.isLoadedFromServer()) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.assetServerURL();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (Platform.OS === <span class="string">'android'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.isLoadedFromFileSystem() ?</span><br><span class="line">        <span class="keyword">this</span>.drawableFolderInBundle() :</span><br><span class="line">        <span class="keyword">this</span>.resourceIdentifierWithoutScale();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.scaledAssetPathInBundle();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>重点来啦，AssetSourceResolver是通过this.isLoadedFromFileSystem区分加载内存和存储设备或者res中drawable资源。在resolveAssetSource中，内置assets://时，this.isLoadedFromFileSystem为false，所以从res中加载图片资源。</p>
+<h5 id="分析总结"><a href="#分析总结" class="headerlink" title="分析总结"></a>分析总结</h5><p>React Native图片资源加载机制,依赖bundle文件路径加载图片资源。</p>
+<ul>
+<li>bundle文件内置assets时，加载res中的drawable资源，故内置bundle时，需要把bundle依赖的资源copy到res中；、</li>
+<li>bundle文件在内存或者存储设备时，加载bundle文件同目录下的图片资源。</li>
+</ul>
+<h3 id="问题来啦"><a href="#问题来啦" class="headerlink" title="问题来啦"></a>问题来啦</h3><p>当我们内置bundle文件到assets中时，React Native要求把图片资源拷贝到res下才能访问到图片资源，以提升bundle文件访问图片资源的效率。但是这些资源在我们应用中只有bundle文件需要我们把bundle文件需要的图片资源和宿主应用的图片资源混在res中，不利于项目资源管理。</p>
+<p>理想的情况是bundle文件和图片资源文件可以一起内置到assets中，那么我们怎么解决呢？</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>在resolveAssetSource中，我们可以看到resolveAssetSource的构造方法中优先_customSourceTransformer对assets处理，不存在时，才使用resolver.defaultAsset()。看来我们需要自定义一个Transformer来搞定。</p>
+<p>核心代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  AppRegistry,</span><br><span class="line">  Image,</span><br><span class="line">  NativeModules,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'react-native'</span></span><br><span class="line"><span class="keyword">import</span> Root <span class="keyword">from</span> <span class="string">'./app/root'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; setCustomSourceTransformer &#125; = <span class="built_in">require</span>(<span class="string">'resolveAssetSource'</span>);</span><br><span class="line"><span class="keyword">const</span> PixelRatio = <span class="built_in">require</span>(<span class="string">'PixelRatio'</span>);</span><br><span class="line"><span class="keyword">const</span> AssetSourceResolver = <span class="built_in">require</span>(<span class="string">'AssetSourceResolver'</span>);</span><br><span class="line"><span class="keyword">const</span> assetPathUtils = <span class="built_in">require</span>(<span class="string">'./node_modules/react-native/local-cli/bundle/assetPathUtils'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAssetPathInDrawableFolder</span>(<span class="params">asset</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> scale = AssetSourceResolver.pickScale(asset.scales, PixelRatio.get());</span><br><span class="line">  <span class="keyword">const</span> drawbleFolder = assetPathUtils.getAndroidDrawableFolderName(asset, scale);</span><br><span class="line">  <span class="keyword">const</span> fileName = assetPathUtils.getAndroidResourceIdentifier(asset);</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;drawbleFolder&#125;</span>/<span class="subst">$&#123;fileName&#125;</span>.<span class="subst">$&#123;asset.type&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setCustomSourceTransformer((resolver) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; SourceCode &#125; = NativeModules;</span><br><span class="line">  <span class="keyword">let</span> bundlePath = SourceCode.scriptURL;</span><br><span class="line">  <span class="keyword">if</span> (bundlePath.startsWith(<span class="string">'assets://'</span>)) &#123;</span><br><span class="line">    bundlePath = bundlePath.substring(<span class="number">9</span>, bundlePath.lastIndexOf(<span class="string">'/'</span>) + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> rootURL = <span class="string">`asset:///<span class="subst">$&#123;bundlePath&#125;</span>`</span>;</span><br><span class="line">    <span class="keyword">const</span> asset = resolver.asset;</span><br><span class="line">    <span class="keyword">return</span> resolver.fromSource(</span><br><span class="line">      rootURL + getAssetPathInDrawableFolder(asset)</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> resolver.defaultAsset();</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">AppRegistry.registerComponent(<span class="string">'Root'</span>, () =&gt; Root)</span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/22/git-branch-rebase/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Git合并分支实践</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="react_native_android" data-title="React Native Android 图片资源问题" data-url="https://github.com/iFarSeer/2016/09/22/react_native_android/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cczscq"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 赵淑超
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
